@@ -1,0 +1,19 @@
+/* Layout.module.css */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.main {
+  flex: 1;
+  background-color: #0a0a0a;
+}

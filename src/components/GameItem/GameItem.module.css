@@ -1,0 +1,98 @@
+/* GameItem.module.css */
+.card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.content {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.info {
+  margin-bottom: 8px;
+}
+
+.label {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.value {
+  color: #e5e7eb;
+  font-size: 0.875rem;
+  margin-left: 4px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ratingValue {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.favorite {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.875rem;
+}
+
+.favoriteTrue {
+  color: #e63946;
+}
+
+.favoriteFalse {
+  color: #6c757d;
+}
+
+.button {
+  margin-top: auto;
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.button:hover {
+  background: #c1121f;
+}

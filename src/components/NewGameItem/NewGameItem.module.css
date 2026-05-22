@@ -1,0 +1,162 @@
+/* CarouselGameItem.module.css */
+.card {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  margin: 20px 40px;
+  min-height: 450px;
+  width: 100%;
+  max-width: 1200px;
+  /* Фіксована висота для всіх карток */
+  height: 500px;
+}
+
+.imageSide {
+  flex: 0.8;
+  min-width: 0;
+  /* Фіксована висота */
+  height: 500px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.contentSide {
+  flex: 1.2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Розподіляє простір */
+  background: #1a1a1a; /* Темний фон для контрасту */
+}
+
+.badge {
+  display: inline-block;
+  background-color: #e63946;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff; /* Яскраво-білий */
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Тінь для кращої читабельності */
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.rating {
+  color: #ffc107; /* Жовтий для рейтингу */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.genre {
+  color: #cccccc; /* Світло-сірий */
+  font-size: 1rem;
+}
+
+.description {
+  color: #e0e0e0; /* Світлий колір для опису */
+  line-height: 1.6;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  /* Обмежуємо висоту опису */
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Стилі для скролбару опису */
+.description::-webkit-scrollbar {
+  width: 5px;
+}
+
+.description::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 10px;
+}
+
+.description::-webkit-scrollbar-thumb {
+  background: #e63946;
+  border-radius: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+}
+
+.favorite {
+  color: #e63946;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background-color: #c1121f;
+  transform: translateX(5px);
+}
+
+/* Для мобільних пристроїв */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    margin: 10px;
+    min-height: auto;
+    height: auto;
+  }
+
+  .imageSide {
+    height: 250px;
+  }
+
+  .contentSide {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    max-height: 100px;
+  }
+}

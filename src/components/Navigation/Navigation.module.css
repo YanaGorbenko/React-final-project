@@ -1,0 +1,43 @@
+/* Navigation.module.css */
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
+.navList {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  margin: 0;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.navLink:hover {
+  color: #e63946;
+}
+
+/* Активне посилання */
+.active {
+  color: #e63946;
+  border-bottom: 2px solid #e63946;
+}
+
+/* Якщо хочете різні кольори для різних станів */
+.navLink:active {
+  color: #c1121f;
+}
