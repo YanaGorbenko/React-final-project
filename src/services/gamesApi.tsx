@@ -10,3 +10,9 @@ export const getGames = async () => {
 
   return data;
 };
+
+export const changeIsFavorite = async (game: Game, isFavorite: boolean) => {
+  const updatedGame = { ...game, isFavorite };
+  const { data } = await axios.put(`/games/${game.id}`, updatedGame);
+  return data;
+};

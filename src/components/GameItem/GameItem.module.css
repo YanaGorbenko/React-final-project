@@ -1,7 +1,7 @@
 /* GameItem.module.css */
 .card {
   background: #1a1a1a;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   transition:
     transform 0.3s ease,
@@ -9,66 +9,72 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 220px; /* ← обмежуємо максимальну ширину */
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .image {
   width: 100%;
-  height: 200px;
+  height: 160px;
   object-fit: cover;
 }
 
 .content {
-  padding: 16px;
+  padding: 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .title {
-  font-size: 1.125rem;
+  font-size: 0.9rem; /* трохи менший шрифт */
   font-weight: 600;
   color: white;
-  margin: 0 0 12px 0;
-  line-height: 1.4;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info {
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .label {
   color: #9ca3af;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   font-weight: 500;
 }
 
 .value {
   color: #e5e7eb;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   margin-left: 4px;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 
 .ratingValue {
   color: #ffc107;
   font-weight: 600;
+  font-size: 0.75rem;
 }
 
 .favorite {
   display: inline-block;
-  margin-top: 8px;
-  font-size: 0.875rem;
+  margin-top: 6px;
+  font-size: 0.7rem;
 }
 
 .favoriteTrue {
@@ -84,9 +90,9 @@
   background: #e63946;
   color: white;
   border: none;
-  padding: 10px 16px;
+  padding: 8px 12px;
   border-radius: 6px;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -95,4 +101,47 @@
 
 .button:hover {
   background: #c1121f;
+}
+
+.favorite {
+  margin-bottom: 10px;
+}
+
+.favoriteBtn {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.favoriteTrue {
+  background: rgba(230, 57, 70, 0.2);
+  color: #e63946;
+  border: 1px solid #e63946;
+}
+
+.favoriteTrue:hover {
+  background: rgba(230, 57, 70, 0.3);
+  transform: scale(1.02);
+}
+
+.favoriteFalse {
+  background: rgba(108, 117, 125, 0.2);
+  color: #adb5bd;
+  border: 1px solid #6c757d;
+}
+
+.favoriteFalse:hover {
+  background: rgba(230, 57, 70, 0.2);
+  color: #e63946;
+  border-color: #e63946;
+  transform: scale(1.02);
 }

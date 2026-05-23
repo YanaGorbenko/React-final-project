@@ -1,0 +1,49 @@
+/* AllGamesPage.module.css */
+.page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #9ca3af;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.content {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  flex-direction: row; /* ← Гарантуємо що рядок, а не колонка */
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .page {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .content {
+    flex-direction: column; /* На мобільних стовпчиком */
+  }
+}

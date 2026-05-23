@@ -1,0 +1,110 @@
+/* GenreSection.module.css */
+.section {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 24px;
+  padding: 28px;
+  transition: all 0.3s ease;
+  border: 1px solid #2a2a2a;
+}
+
+.section:hover {
+  transform: translateY(-4px);
+  border-color: #e63946;
+  box-shadow: 0 10px 30px rgba(230, 57, 70, 0.1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.titleText {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.genreName {
+  color: #e63946;
+}
+
+.description {
+  color: #b0b0b0;
+  line-height: 1.7;
+  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+  max-width: 800px;
+}
+
+.topLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.topIcon {
+  font-size: 1.25rem;
+}
+
+.topText {
+  color: #ffc107;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.gamesContainer {
+  margin-top: 8px;
+}
+
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .icon {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .topText {
+    font-size: 0.75rem;
+  }
+}

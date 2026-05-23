@@ -1,12 +1,11 @@
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { selectGetFiveNewestGames, useGamesStore } from '../../store/gameStore';
+import { selectFiveNewestGames, useGamesStore } from '../../store/gameStore';
 import { NewGameItem } from '../NewGameItem/NewGameItem';
 import css from './NewGameSection.module.css';
 
 export const NewGamesSection = () => {
-  const getNewGames = useGamesStore(selectGetFiveNewestGames);
-  const newGames = getNewGames();
+  const newGames = useGamesStore(selectFiveNewestGames);
 
   return (
     <section className={css.section}>

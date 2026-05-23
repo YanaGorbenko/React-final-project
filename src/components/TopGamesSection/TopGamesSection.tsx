@@ -1,13 +1,9 @@
-import {
-  selectGetTopEightRatedGames,
-  useGamesStore,
-} from '../../store/gameStore';
+import { selectTopEightRatedGames, useGamesStore } from '../../store/gameStore';
 import { GameItem } from '../GameItem/GameItem';
 import css from './TopGameSection.module.css';
 
 export const TopGamesSection = () => {
-  const get8TopGames = useGamesStore(selectGetTopEightRatedGames);
-  const topGames = get8TopGames();
+  const topGames = useGamesStore(selectTopEightRatedGames);
 
   return (
     <section className={css.section}>

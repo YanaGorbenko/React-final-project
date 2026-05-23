@@ -1,3 +1,4 @@
+import { selectToggleFavorite, useGamesStore } from '../../store/gameStore';
 import type { Game } from '../../types/game';
 import css from './NewGameItem.module.css';
 
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export const NewGameItem = ({ game }: Props) => {
+  const toggleFavorite = useGamesStore(selectToggleFavorite);
   return (
     <div className={css.card}>
       <div className={css.imageSide}>
@@ -24,7 +26,10 @@ export const NewGameItem = ({ game }: Props) => {
             : game.description}
         </p>
         <div className={css.footer}>
-          <div className={css.favorite}>
+          <div
+            className={`${css.favorite} ${game.isFavorite ? css.favoriteActive : css.favoriteInactive}`}
+            onClick={() => toggleFavorite(game.id)}
+          >
             {game.isFavorite ? '★ В обраному' : '☆ Додати в обране'}
           </div>
           <button className={css.button}>Детальніше →</button>
