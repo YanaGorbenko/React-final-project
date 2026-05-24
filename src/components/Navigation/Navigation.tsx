@@ -37,7 +37,7 @@ export const Navigation = () => {
         </li>
         <li className={css.navItem}>
           <NavLink
-            to="/gamesIdeas"
+            to="/gameIdeas"
             className={({ isActive }) =>
               isActive ? `${css.navLink} ${css.active}` : css.navLink
             }

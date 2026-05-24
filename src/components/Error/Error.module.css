@@ -1,0 +1,54 @@
+/* Error.module.css */
+.container {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.content {
+  text-align: center;
+  max-width: 500px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 24px;
+  padding: 40px;
+  border: 1px solid #2a2a2a;
+}
+
+.icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.message {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.retryButton {
+  background: transparent;
+  border: 2px solid #e63946;
+  color: #e63946;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+  background: #e63946;
+  color: white;
+  transform: translateY(-2px);
+}

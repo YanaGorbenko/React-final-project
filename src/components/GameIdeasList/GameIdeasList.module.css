@@ -1,0 +1,61 @@
+/* GameIdeasList.module.css */
+.container {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.listTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.count {
+  color: #e63946;
+  font-weight: 700;
+}
+
+.emptyState {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  border: 1px solid #2a2a2a;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  color: #6c757d;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  margin: 0;
+}

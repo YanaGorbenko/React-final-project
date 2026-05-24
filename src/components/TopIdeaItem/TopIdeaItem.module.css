@@ -1,0 +1,108 @@
+/* TopIdeaItem.module.css */
+.card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  border: 1px solid #2a2a2a;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #ffc107;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.rankIcon {
+  font-size: 2rem;
+}
+
+.rankNumber {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.genre {
+  background: rgba(230, 57, 70, 0.2);
+  color: #e63946;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.author {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.description {
+  color: #b0b0b0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.votes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.votesIcon {
+  font-size: 1rem;
+}
+
+.votesCount {
+  color: #ffc107;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.date {
+  color: #6c757d;
+  font-size: 0.75rem;
+}

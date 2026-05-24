@@ -1,11 +1,15 @@
+import { Error } from '../../components/Error/Error';
 import { GamesFilters } from '../../components/GamesFilters/GamesFilters';
 import { GamesList } from '../../components/GamesList/GamesList';
+import { Loader } from '../../components/Loader/Loader';
 import {
   selectAllGenresFilter,
   selectAllSearchWord,
   selectAllSortByRating,
   selectAllSortByTitle,
+  selectError,
   selectFilteredAllGames,
+  selectIsLoading,
   selectSetAllGenresFilter,
   selectSetAllSearchWord,
   selectSetAllSortByRating,
@@ -24,6 +28,8 @@ export const AllGamesPage = () => {
   const changeTitleSort = useGamesStore(selectSetAllSortByTitle);
   const changeRatingSort = useGamesStore(selectSetAllSortByRating);
   const changeGenres = useGamesStore(selectSetAllGenresFilter);
+  const isLoading = useGamesStore(selectIsLoading);
+  const isError = useGamesStore(selectError);
 
   const params = { search, sortTitle, sortRating, genres };
   const functions = {
@@ -40,11 +46,14 @@ export const AllGamesPage = () => {
         <h2 className={css.subtitle}>
           Відкрийте для себе нашу повну колекцію ігор
         </h2>
-        <div className={css.content}>
-          <GamesList games={games} /> {/* ← ПЕРШИЙ - буде зліва */}
-          <GamesFilters params={params} functions={functions} />{' '}
-          {/* ← ДРУГИЙ - буде справа */}
-        </div>
+        <Loader isLoading={isLoading} />
+        {!isLoading && !isError && (
+          <div className={css.content}>
+            <GamesList games={games} />
+            <GamesFilters params={params} functions={functions} />{' '}
+          </div>
+        )}
+        {isError && <Error error={isError} />}
       </div>
     </div>
   );

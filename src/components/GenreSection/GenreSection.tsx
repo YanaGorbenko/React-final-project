@@ -1,8 +1,15 @@
 import { useMemo } from 'react';
-import { selectTop3GamesByGenre, useGamesStore } from '../../store/gameStore';
+import {
+  selectError,
+  selectIsLoading,
+  selectTop3GamesByGenre,
+  useGamesStore,
+} from '../../store/gameStore';
 import type { Genre } from '../../types/genre';
 import { GameItem } from '../GameItem/GameItem';
 import css from './GenresSection.module.css';
+import { Loader } from '../Loader/Loader';
+import { Error } from '../Error/Error';
 
 interface Props {
   genre: Genre;
@@ -10,6 +17,8 @@ interface Props {
 
 export const GenreSection = ({ genre }: Props) => {
   const top3GamesByGenre = useGamesStore(selectTop3GamesByGenre);
+  const isLoading = useGamesStore(selectIsLoading);
+  const isError = useGamesStore(selectError);
 
   const top3Games = useMemo(() => {
     return top3GamesByGenre[genre.name] || [];
@@ -24,23 +33,30 @@ export const GenreSection = ({ genre }: Props) => {
           </span>
         </h2>
       </div>
-
       <p className={css.description}>{genre.description}</p>
-
       <div className={css.topLabel}>
         <span className={css.topIcon}>🏆</span>
         <span className={css.topText}>Топ-3 гри жанру {genre.name}</span>
       </div>
-
-      <div className={css.gamesContainer}>
-        <div className={css.gamesGrid}>
-          {top3Games.map(game => (
-            <div key={game.id} className={css.gameCard}>
-              <GameItem game={game} />
+      <Loader isLoading={isLoading} />
+      {!isLoading && !isError && (
+        <div className={css.gamesContainer}>
+          {top3Games.length === 0 ? (
+            <div className={css.noGames}>
+              <p>Немає ігор у цьому жанрі</p>
             </div>
-          ))}
+          ) : (
+            <div className={css.gamesGrid}>
+              {top3Games.map(game => (
+                <div key={game.id} className={css.gameCard}>
+                  <GameItem game={game} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
+      )}{' '}
+      {isError && <Error error={isError} />}
     </section>
   );
 };

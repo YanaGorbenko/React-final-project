@@ -287,13 +287,11 @@ export const selectSetSelectedSortByRating = (state: GamesStore) =>
 export const selectSetSelectedGenresFilter = (state: GamesStore) =>
   state.setSelectedGenresFilter;
 
-// Загальні селектори (для Hero, TopGames, NewGames)
 export const selectAllGames = (state: GamesStore) => state.games;
 export const selectIsLoading = (state: GamesStore) => state.isLoading;
 export const selectError = (state: GamesStore) => state.error;
 export const selectFetchGames = (state: GamesStore) => state.fetchGames;
 
-// Селектори для методів (вони не змінюються, тому їх можна так і лишити)
 export const selectGetTopRatedGame = (state: GamesStore) =>
   state.getTopRatedGame;
 export const selectTopEightRatedGames = (state: GamesStore) =>

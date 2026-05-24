@@ -1,5 +1,6 @@
 import { GenreSection } from '../../components/GenreSection/GenreSection';
 import { GENRES } from '../../data/genres';
+
 import css from './GenresPage.module.css';
 
 export const GenresPage = () => {
