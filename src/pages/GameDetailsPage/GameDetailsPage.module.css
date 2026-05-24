@@ -1,0 +1,38 @@
+/* GameDetailsPage.module.css */
+.page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid #e63946;
+  color: #e63946;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.backButton:hover {
+  background: #e63946;
+  color: white;
+  transform: translateX(-4px);
+}
+
+.backButton::before {
+  content: '←';
+  font-size: 1.1rem;
+}

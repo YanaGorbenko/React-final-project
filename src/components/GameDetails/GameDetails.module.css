@@ -1,0 +1,191 @@
+/* GameDetails.module.css */
+.card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid #2a2a2a;
+}
+
+.content {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.imageSection {
+  flex: 0 0 300px;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.02);
+}
+
+.infoSection {
+  flex: 1;
+  min-width: 280px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #fff, #e63946);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.infoLabel {
+  font-weight: 600;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+
+.infoValue {
+  color: #e5e7eb;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.genreBadge {
+  background: rgba(230, 57, 70, 0.2);
+  color: #e63946;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.ratingValue {
+  color: #ffc107;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.releaseDate {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.description {
+  background: #0a0a0a;
+  padding: 20px;
+  border-radius: 16px;
+  margin: 20px 0;
+  border-left: 4px solid #e63946;
+}
+
+.descriptionText {
+  color: #b0b0b0;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.favoriteSection {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.favoriteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 2px solid #e63946;
+  color: #e63946;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favoriteBtn:hover {
+  background: #e63946;
+  color: white;
+  transform: scale(1.02);
+}
+
+.favoriteActive {
+  background: #e63946;
+  color: white;
+}
+
+.favoriteActive:hover {
+  background: #c1121f;
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .imageSection {
+    flex: 0 0 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .infoItem {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .infoLabel {
+    min-width: auto;
+  }
+
+  .description {
+    padding: 16px;
+  }
+
+  .descriptionText {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .favoriteBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

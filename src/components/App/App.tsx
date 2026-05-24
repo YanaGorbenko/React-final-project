@@ -4,6 +4,7 @@ import { HomePage } from '../../pages/HomePage/HomePage';
 import { AllGamesPage } from '../../pages/AllGamesPage/AllGamesPage';
 import { SelectedGamesPage } from '../../pages/SelectedGamesPage/SelectedGamesPage';
 import { GenresPage } from '../../pages/GenresPage/GenresPage';
+import { GameDetailsPage } from '../../pages/GameDetailsPage/GameDetailsPage';
 
 export const App = () => {
   return (
@@ -13,9 +14,7 @@ export const App = () => {
         <Route path="/games" element={<AllGamesPage />} />
         <Route path="/selected" element={<SelectedGamesPage />} />
         <Route path="/genres" element={<GenresPage />} />
-        {/* <Route path="/selected" element={<SelectedGamePage />} /> */}
-
-        {/* <Route path="products/:productId" element={<ProductDetailsPage />} /> */}
+        <Route path="/:gameId/details" element={<GameDetailsPage />} />
       </Route>
     </Routes>
   );

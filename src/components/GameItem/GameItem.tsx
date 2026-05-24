@@ -1,12 +1,14 @@
 import { selectToggleFavorite, useGamesStore } from '../../store/gameStore';
 import type { Game } from '../../types/game';
 import css from './GameItem.module.css';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 interface Props {
   game: Game;
 }
 
 export const GameItem = ({ game }: Props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const toggleFavorite = useGamesStore(selectToggleFavorite);
 
   return (
@@ -32,7 +34,16 @@ export const GameItem = ({ game }: Props) => {
           </button>
         </div>
 
-        <button className={css.button}>Детальніше →</button>
+        <button
+          className={css.button}
+          onClick={() =>
+            navigate(`/${game.id}/details`, {
+              state: { from: location.pathname },
+            })
+          }
+        >
+          Детальніше →
+        </button>
       </div>
     </div>
   );
