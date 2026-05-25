@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 import { type Game } from '../types/game';
 import { changeIsFavorite, getGames } from '../services/gamesApi';
-import { filterAndSortGames } from '../utils/filterUtils';
 
 interface GamesStore {
   games: Game[];
   isLoading: boolean;
   error: string | null;
+
   allFilters: {
     searchWord: string;
     sortByTitle: 'not' | 'asc' | 'desc';
@@ -24,11 +24,8 @@ interface GamesStore {
   filteredAllGames: Game[];
   filteredSelectedGames: Game[];
   top8RatedGames: Game[];
-
   newGames: Game[];
   top3GamesByGenre: { [genre: string]: Game[] };
-  getTop3GamesByGenre: (genre: string) => Game[];
-  updateTop3GamesByGenre: () => void;
 
   setAllSearchWord: (word: string) => void;
   setAllSortByTitle: (sort: 'asc' | 'desc' | 'not') => void;
@@ -45,6 +42,7 @@ interface GamesStore {
   fetchGames: () => Promise<void>;
   toggleFavorite: (gameId: string) => Promise<void>;
   getTopRatedGame: () => Game | undefined;
+  updateTop3GamesByGenre: () => void;
 }
 
 export const useGamesStore = create<GamesStore>((set, get) => ({
@@ -52,7 +50,6 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   isLoading: false,
   error: null,
 
-  // Початкові стани фільтрів
   allFilters: {
     searchWord: '',
     sortByTitle: 'not',
@@ -70,14 +67,9 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   filteredAllGames: [],
   filteredSelectedGames: [],
   top8RatedGames: [],
-  top3GamesByGenre: {},
   newGames: [],
-  getTop3GamesByGenre: (genre: string) => {
-    const { top3GamesByGenre } = get();
-    return top3GamesByGenre[genre] || [];
-  },
+  top3GamesByGenre: {},
 
-  // Оновлює топ-3 для всіх жанрів на основі поточних ігор
   updateTop3GamesByGenre: () => {
     const { games } = get();
     const genres = [
@@ -99,7 +91,6 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
         .filter(game => game.genre.toLowerCase() === genre.toLowerCase())
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 3);
-
       top3ByGenre[genre] = genreGames;
     });
 
@@ -108,27 +99,29 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
 
   fetchGames: async () => {
     set({ isLoading: true, error: null });
-
     try {
-      const games = await getGames();
+      const games = await getGames({});
+
       const topGames = [...games]
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 8);
-      const newGames = [...games]
+      const newestGames = [...games]
         .sort(
           (a, b) =>
             new Date(b.releaseDate).getTime() -
             new Date(a.releaseDate).getTime(),
         )
         .slice(0, 5);
+
       set({
         games,
         isLoading: false,
+        top8RatedGames: topGames,
+        newGames: newestGames,
         filteredAllGames: games,
         filteredSelectedGames: games.filter(g => g.isFavorite),
-        top8RatedGames: topGames,
-        newGames,
       });
+
       get().updateTop3GamesByGenre();
     } catch (error) {
       set({
@@ -138,37 +131,6 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     }
   },
 
-  toggleFavorite: async (gameId: string) => {
-    const { games } = get();
-
-    const game = games.find(g => g.id === gameId);
-    if (!game) return;
-
-    try {
-      const updatedGame = await changeIsFavorite(game, !game.isFavorite);
-
-      const updatedGames = games.map(g => (g.id === gameId ? updatedGame : g));
-      const topGames = [...updatedGames]
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 8);
-      const newGames = [...updatedGames]
-        .sort(
-          (a, b) =>
-            new Date(b.releaseDate).getTime() -
-            new Date(a.releaseDate).getTime(),
-        )
-        .slice(0, 5);
-
-      set({ games: updatedGames, top8RatedGames: topGames, newGames });
-      get().applyAllFilters();
-      get().applySelectedFilters();
-      get().updateTop3GamesByGenre();
-    } catch (error) {
-      console.error('Failed to toggle favorite:', error);
-    }
-  },
-
-  // Методи для "Всі ігри"
   setAllSearchWord: word => {
     set({ allFilters: { ...get().allFilters, searchWord: word } });
     get().applyAllFilters();
@@ -189,18 +151,34 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     get().applyAllFilters();
   },
 
-  applyAllFilters: () => {
-    const { games, allFilters } = get();
-    const filtered = filterAndSortGames(games, {
-      searchWord: allFilters.searchWord,
-      sortByTitle: allFilters.sortByTitle,
-      sortByRating: allFilters.sortByRating,
-      genresFilter: allFilters.genresFilter,
-    });
-    set({ filteredAllGames: filtered });
+  applyAllFilters: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const { allFilters } = get();
+
+      let filtered = await getGames({
+        searchWord: allFilters.searchWord,
+        sortByTitle: allFilters.sortByTitle,
+        sortByRating: allFilters.sortByRating,
+      });
+
+      if (allFilters.genresFilter.length > 0) {
+        filtered = filtered.filter(game =>
+          allFilters.genresFilter.includes(game.genre),
+        );
+      }
+
+      set({ filteredAllGames: filtered, isLoading: false });
+    } catch (error) {
+      console.error('Apply filters error:', error);
+      set({
+        filteredAllGames: [],
+        isLoading: false,
+        error: null,
+      });
+    }
   },
 
-  // Методи для "Обрані ігри"
   setSelectedSearchWord: word => {
     set({ selectedFilters: { ...get().selectedFilters, searchWord: word } });
     get().applySelectedFilters();
@@ -223,19 +201,71 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     get().applySelectedFilters();
   },
 
-  applySelectedFilters: () => {
-    const { games, selectedFilters } = get();
-    const selectedGames = games.filter(game => game.isFavorite);
-    const filtered = filterAndSortGames(selectedGames, {
-      searchWord: selectedFilters.searchWord,
-      sortByTitle: selectedFilters.sortByTitle,
-      sortByRating: selectedFilters.sortByRating,
-      genresFilter: selectedFilters.genresFilter,
-    });
-    set({ filteredSelectedGames: filtered });
+  applySelectedFilters: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const { selectedFilters } = get();
+
+      // Запит на бекенд (пошук + сортування для всіх ігор)
+      let allFiltered = await getGames({
+        searchWord: selectedFilters.searchWord,
+        sortByTitle: selectedFilters.sortByTitle,
+        sortByRating: selectedFilters.sortByRating,
+      });
+
+      // Фільтруємо тільки обрані
+      let filtered = allFiltered.filter(game => game.isFavorite);
+
+      // ТІЛЬКИ фільтрація за жанрами на фронтенді
+      if (selectedFilters.genresFilter.length > 0) {
+        filtered = filtered.filter(game =>
+          selectedFilters.genresFilter.includes(game.genre),
+        );
+      }
+
+      set({ filteredSelectedGames: filtered, isLoading: false });
+    } catch (error) {
+      console.error('Apply selected filters error:', error);
+      set({
+        filteredSelectedGames: [],
+        isLoading: false,
+        error: null,
+      });
+    }
   },
 
-  // Інші методи без змін...
+  toggleFavorite: async (gameId: string) => {
+    try {
+      const { games } = get();
+      const game = games.find(g => g.id === gameId);
+      if (!game) return;
+      const updatedGame = await changeIsFavorite(game, !game.isFavorite);
+      const updatedGames = games.map(g => (g.id === gameId ? updatedGame : g));
+      const topGames = [...updatedGames]
+        .sort((a, b) => b.rating - a.rating)
+        .slice(0, 8);
+      const newestGames = [...updatedGames]
+        .sort(
+          (a, b) =>
+            new Date(b.releaseDate).getTime() -
+            new Date(a.releaseDate).getTime(),
+        )
+        .slice(0, 5);
+
+      set({
+        games: updatedGames,
+        top8RatedGames: topGames,
+        newGames: newestGames,
+      });
+
+      get().updateTop3GamesByGenre();
+      get().applyAllFilters();
+      get().applySelectedFilters();
+    } catch (error) {
+      console.error('Failed to toggle favorite:', error);
+    }
+  },
+
   getTopRatedGame: () => {
     const { games } = get();
     if (games.length === 0) return undefined;
@@ -245,7 +275,7 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   },
 }));
 
-// Селектори для "Всі ігри"
+// Селектори (без змін)
 export const selectFilteredAllGames = (state: GamesStore) =>
   state.filteredAllGames;
 export const selectAllSearchWord = (state: GamesStore) =>
@@ -266,7 +296,6 @@ export const selectSetAllSortByRating = (state: GamesStore) =>
 export const selectSetAllGenresFilter = (state: GamesStore) =>
   state.setAllGenresFilter;
 
-// Селектори для "Обрані ігри"
 export const selectFilteredSelectedGames = (state: GamesStore) =>
   state.filteredSelectedGames;
 export const selectSelectedSearchWord = (state: GamesStore) =>
@@ -297,8 +326,6 @@ export const selectGetTopRatedGame = (state: GamesStore) =>
 export const selectTopEightRatedGames = (state: GamesStore) =>
   state.top8RatedGames;
 export const selectFiveNewestGames = (state: GamesStore) => state.newGames;
-
-// Додаткові селектори, якщо потрібні
 export const selectToggleFavorite = (state: GamesStore) => state.toggleFavorite;
 export const selectTop3GamesByGenre = (state: GamesStore) =>
   state.top3GamesByGenre;

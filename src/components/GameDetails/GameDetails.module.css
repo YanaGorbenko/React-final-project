@@ -149,7 +149,124 @@
   transform: scale(1.02);
 }
 
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .content {
+    gap: 32px;
+    padding: 32px;
+  }
+
+  .imageSection {
+    flex: 0 0 280px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+
+  .infoList {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    padding: 18px;
+    margin: 18px 0;
+  }
+
+  .descriptionText {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .favoriteSection {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .favoriteBtn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .card {
+    border-radius: 20px;
+  }
+
+  .content {
+    gap: 28px;
+    padding: 28px;
+  }
+
+  .imageSection {
+    flex: 0 0 250px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 14px;
+  }
+
+  .infoList {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .infoLabel {
+    font-size: 0.85rem;
+    min-width: 70px;
+  }
+
+  .infoValue {
+    font-size: 0.95rem;
+  }
+
+  .genreBadge {
+    padding: 3px 10px;
+    font-size: 0.8rem;
+  }
+
+  .ratingValue {
+    font-size: 1rem;
+  }
+
+  .releaseDate {
+    font-size: 0.85rem;
+  }
+
+  .description {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .descriptionText {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .favoriteSection {
+    margin-top: 18px;
+    padding-top: 18px;
+  }
+
+  .favoriteBtn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Планшети малі (768px) */
 @media (max-width: 768px) {
+  .card {
+    border-radius: 18px;
+  }
+
   .content {
     padding: 20px;
     gap: 24px;
@@ -157,13 +274,14 @@
 
   .imageSection {
     flex: 0 0 100%;
-    max-width: 300px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
   .title {
     font-size: 1.75rem;
     text-align: center;
+    margin-bottom: 16px;
   }
 
   .infoItem {
@@ -176,16 +294,304 @@
   }
 
   .description {
-    padding: 16px;
+    padding: 14px;
   }
 
   .descriptionText {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.6;
   }
 
   .favoriteBtn {
     width: 100%;
     justify-content: center;
+    padding: 10px 20px;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .card {
+    border-radius: 16px;
+  }
+
+  .content {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .imageSection {
+    max-width: 240px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .infoList {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .infoLabel {
+    font-size: 0.8rem;
+  }
+
+  .infoValue {
+    font-size: 0.9rem;
+  }
+
+  .genreBadge {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+  }
+
+  .ratingValue {
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .releaseDate {
+    font-size: 0.8rem;
+  }
+
+  .description {
+    padding: 12px;
+    margin: 12px 0;
+    border-left-width: 3px;
+  }
+
+  .descriptionText {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .favoriteSection {
+    margin-top: 16px;
+    padding-top: 16px;
+  }
+
+  .favoriteBtn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    gap: 6px;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .card {
+    border-radius: 14px;
+  }
+
+  .content {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .imageSection {
+    max-width: 200px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .infoList {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .infoLabel {
+    font-size: 0.75rem;
+  }
+
+  .infoValue {
+    font-size: 0.85rem;
+  }
+
+  .genreBadge {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+  }
+
+  .ratingValue {
+    font-size: 0.85rem;
+  }
+
+  .releaseDate {
+    font-size: 0.75rem;
+  }
+
+  .description {
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .descriptionText {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .favoriteSection {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .favoriteBtn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    border-width: 1.5px;
+  }
+}
+
+/* Дуже маленькі телефони (до 360px) */
+@media (max-width: 360px) {
+  .content {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .imageSection {
+    max-width: 180px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .infoLabel {
+    font-size: 0.7rem;
+  }
+
+  .infoValue {
+    font-size: 0.8rem;
+  }
+
+  .descriptionText {
+    font-size: 0.7rem;
+  }
+
+  .favoriteBtn {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .card {
+    border-radius: 28px;
+  }
+
+  .content {
+    gap: 48px;
+    padding: 48px;
+  }
+
+  .imageSection {
+    flex: 0 0 350px;
+  }
+
+  .title {
+    font-size: 2.8rem;
+    margin-bottom: 24px;
+  }
+
+  .infoList {
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+
+  .infoLabel {
+    font-size: 1rem;
+    min-width: 100px;
+  }
+
+  .infoValue {
+    font-size: 1.1rem;
+  }
+
+  .genreBadge {
+    padding: 5px 14px;
+    font-size: 0.9rem;
+  }
+
+  .ratingValue {
+    font-size: 1.2rem;
+  }
+
+  .releaseDate {
+    font-size: 1rem;
+  }
+
+  .description {
+    padding: 24px;
+    margin: 24px 0;
+  }
+
+  .descriptionText {
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .favoriteSection {
+    margin-top: 28px;
+    padding-top: 28px;
+  }
+
+  .favoriteBtn {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .card {
+    border-radius: 32px;
+  }
+
+  .content {
+    gap: 56px;
+    padding: 56px;
+  }
+
+  .imageSection {
+    flex: 0 0 400px;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .infoLabel {
+    font-size: 1.1rem;
+  }
+
+  .infoValue {
+    font-size: 1.2rem;
+  }
+
+  .descriptionText {
+    font-size: 1.1rem;
+  }
+
+  .favoriteBtn {
+    padding: 16px 32px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .image:hover {
+    transform: none;
+  }
+
+  .favoriteBtn:hover {
+    transform: none;
   }
 }

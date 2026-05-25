@@ -1,6 +1,6 @@
 /* Navigation.module.css */
 .nav {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
 }
@@ -40,4 +40,184 @@
 /* Якщо хочете різні кольори для різних станів */
 .navLink:active {
   color: #c1121f;
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .nav {
+    max-width: 1100px;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .navList {
+    gap: 1.75rem;
+  }
+
+  .navLink {
+    font-size: 0.95rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .nav {
+    max-width: 960px;
+    padding: 0.8rem 1.5rem;
+  }
+
+  .navList {
+    gap: 1.5rem;
+  }
+
+  .navLink {
+    font-size: 0.9rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .nav {
+    padding: 0.7rem 1rem;
+  }
+
+  .navList {
+    gap: 1.25rem;
+    justify-content: center;
+  }
+
+  .navLink {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+  }
+
+  .active {
+    border-bottom-width: 1.5px;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .nav {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .navList {
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navItem {
+    margin: 0;
+  }
+
+  .navLink {
+    font-size: 0.8rem;
+    padding: 0.3rem 0;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .nav {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .navList {
+    gap: 0.6rem;
+  }
+
+  .navLink {
+    font-size: 0.7rem;
+    padding: 0.25rem 0;
+  }
+
+  .active {
+    border-bottom-width: 1px;
+  }
+}
+
+/* Мобільне меню (бургер) для дуже маленьких екранів (опціонально) */
+@media (max-width: 400px) {
+  .nav {
+    position: relative;
+  }
+
+  /* Якщо потрібно бургер-меню, розкоментуйте */
+  /* .navList {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    padding: 1rem;
+    gap: 0.8rem;
+    z-index: 100;
+  }
+  
+  .navList.open {
+    display: flex;
+  }
+  
+  .navLink {
+    display: block;
+    text-align: center;
+    padding: 0.5rem;
+  } */
+}
+
+/* Горизонтальна орієнтація на телефонах */
+@media (max-width: 896px) and (orientation: landscape) {
+  .nav {
+    padding: 0.5rem 1rem;
+  }
+
+  .navList {
+    gap: 1rem;
+  }
+
+  .navLink {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+  }
+}
+
+@media (hover: none) and (max-width: 768px) {
+  .navLink {
+    padding: 0.6rem 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .nav {
+    max-width: 1600px;
+    padding: 1.2rem 2rem;
+  }
+
+  .navList {
+    gap: 2.5rem;
+  }
+
+  .navLink {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .nav {
+    max-width: 1800px;
+    padding: 1.3rem 2.5rem;
+  }
+
+  .navList {
+    gap: 3rem;
+  }
+
+  .navLink {
+    font-size: 1.2rem;
+  }
 }

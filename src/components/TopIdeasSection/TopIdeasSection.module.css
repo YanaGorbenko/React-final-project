@@ -33,6 +33,298 @@
 }
 
 .grid {
+  /* TopIdeasSection.module.css */
+  .section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fff, #ffc107);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    color: #9ca3af;
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  /* ========== АДАПТАЦІЯ ========== */
+
+  /* Ноутбуки (1024px - 1280px) */
+  @media (max-width: 1280px) {
+    .section {
+      padding: 50px 16px;
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+
+    .grid {
+      gap: 20px;
+    }
+
+    .title {
+      font-size: 1.75rem;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+  }
+
+  /* Планшети (768px - 1024px) */
+  @media (max-width: 1024px) {
+    .section {
+      padding: 45px 16px;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .title {
+      font-size: 1.6rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      max-width: 500px;
+    }
+
+    .header {
+      margin-bottom: 36px;
+    }
+  }
+
+  /* Планшети малі (768px) */
+  @media (max-width: 768px) {
+    .section {
+      padding: 40px 12px;
+    }
+
+    .container {
+      padding: 0 12px;
+    }
+
+    .grid {
+      gap: 16px;
+    }
+
+    .title {
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      margin-bottom: 32px;
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+  }
+
+  /* Телефони (480px - 768px) */
+  @media (max-width: 576px) {
+    .section {
+      padding: 32px 12px;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .title {
+      font-size: 1.3rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      padding: 0 16px;
+    }
+
+    .header {
+      margin-bottom: 28px;
+    }
+  }
+
+  /* Маленькі телефони (до 480px) */
+  @media (max-width: 480px) {
+    .section {
+      padding: 24px 12px;
+    }
+
+    .title {
+      font-size: 1.2rem;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      gap: 16px;
+      max-width: 100%;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+  }
+
+  /* Планшети в альбомній орієнтації */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .title {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Великі десктопи (понад 1400px) */
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1600px;
+    }
+
+    .grid {
+      gap: 32px;
+    }
+
+    .title {
+      font-size: 2.2rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      max-width: 700px;
+    }
+
+    .header {
+      margin-bottom: 56px;
+    }
+  }
+
+  /* Для екранів з високою роздільною здатністю */
+  @media (min-width: 1920px) {
+    .container {
+      max-width: 1800px;
+    }
+
+    .grid {
+      gap: 40px;
+    }
+
+    .title {
+      font-size: 2.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      max-width: 800px;
+    }
+
+    .header {
+      margin-bottom: 64px;
+    }
+  }
+
+  /* Порожній стан */
+  .emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    background: #1a1a1a;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .emptyIcon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .emptyTitle {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .emptyText {
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .emptyState {
+      padding: 40px 16px;
+    }
+
+    .emptyIcon {
+      font-size: 3rem;
+    }
+
+    .emptyTitle {
+      font-size: 1.2rem;
+    }
+  }
+
+  /* Анімація для карток при наведенні */
+  .grid > * {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .grid > *:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Для сенсорних екранів - прибираємо ефект наведення */
+  @media (hover: none) {
+    .grid > *:hover {
+      transform: none;
+    }
+  }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;

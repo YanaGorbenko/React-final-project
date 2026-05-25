@@ -10,7 +10,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 220px; /* ← обмежуємо максимальну ширину */
+  max-width: 220px;
+  margin: 0 auto;
 }
 
 .card:hover {
@@ -32,7 +33,7 @@
 }
 
 .title {
-  font-size: 0.9rem; /* трохи менший шрифт */
+  font-size: 0.9rem;
   font-weight: 600;
   color: white;
   margin: 0 0 8px 0;
@@ -69,38 +70,6 @@
   color: #ffc107;
   font-weight: 600;
   font-size: 0.75rem;
-}
-
-.favorite {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 0.7rem;
-}
-
-.favoriteTrue {
-  color: #e63946;
-}
-
-.favoriteFalse {
-  color: #6c757d;
-}
-
-.button {
-  margin-top: auto;
-  background: #e63946;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-}
-
-.button:hover {
-  background: #c1121f;
 }
 
 .favorite {
@@ -144,4 +113,222 @@
   color: #e63946;
   border-color: #e63946;
   transform: scale(1.02);
+}
+
+.button {
+  margin-top: auto;
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.button:hover {
+  background: #c1121f;
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .card {
+    max-width: 200px;
+  }
+
+  .image {
+    height: 150px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+
+  .label,
+  .value {
+    font-size: 0.65rem;
+  }
+
+  .ratingValue {
+    font-size: 0.7rem;
+  }
+
+  .favoriteBtn,
+  .button {
+    padding: 6px 10px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .card {
+    max-width: 180px;
+  }
+
+  .image {
+    height: 140px;
+  }
+
+  .content {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+  }
+
+  .label,
+  .value {
+    font-size: 0.6rem;
+  }
+
+  .rating {
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .ratingValue {
+    font-size: 0.65rem;
+  }
+
+  .favorite {
+    margin-bottom: 8px;
+  }
+
+  .favoriteBtn,
+  .button {
+    padding: 5px 8px;
+    font-size: 0.6rem;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .card {
+    max-width: 100%;
+  }
+
+  .image {
+    height: 160px;
+  }
+
+  .content {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .label,
+  .value {
+    font-size: 0.7rem;
+  }
+
+  .ratingValue {
+    font-size: 0.75rem;
+  }
+
+  .favoriteBtn,
+  .button {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .card {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .image {
+    height: 170px;
+  }
+
+  .content {
+    padding: 14px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .label,
+  .value {
+    font-size: 0.75rem;
+  }
+
+  .ratingValue {
+    font-size: 0.8rem;
+  }
+
+  .favoriteBtn,
+  .button {
+    padding: 10px 14px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .card {
+    max-width: 260px;
+    border-radius: 12px;
+  }
+
+  .image {
+    height: 180px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .label,
+  .value {
+    font-size: 0.8rem;
+  }
+
+  .ratingValue {
+    font-size: 0.85rem;
+  }
+
+  .favoriteBtn,
+  .button {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+  }
+
+  .favoriteTrue:hover,
+  .favoriteFalse:hover,
+  .button:hover {
+    transform: none;
+  }
 }

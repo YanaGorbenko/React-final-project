@@ -86,13 +86,46 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
   .section {
-    padding: 20px;
+    padding: 24px;
+  }
+
+  .gamesGrid {
+    gap: 18px;
   }
 
   .title {
-    font-size: 1.35rem;
+    font-size: 1.6rem;
+  }
+
+  .icon {
+    font-size: 2.3rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    max-width: 700px;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .section {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .gamesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 1.5rem;
   }
 
   .icon {
@@ -101,10 +134,229 @@
 
   .description {
     font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .topLabel {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+  }
+
+  .topText {
+    font-size: 0.85rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .section {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .section:hover {
+    transform: translateY(-2px);
+  }
+
+  .header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .icon {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
     line-height: 1.5;
+    margin-bottom: 14px;
   }
 
   .topText {
     font-size: 0.75rem;
+  }
+
+  .topIcon {
+    font-size: 1rem;
+  }
+
+  .gamesGrid {
+    gap: 14px;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .section {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .header {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .titleText {
+    gap: 4px;
+  }
+
+  .icon {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .topLabel {
+    gap: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .topIcon {
+    font-size: 0.9rem;
+  }
+
+  .topText {
+    font-size: 0.7rem;
+  }
+
+  .gamesGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .gamesContainer {
+    margin-top: 4px;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .section {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .header {
+    gap: 6px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .icon {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+  }
+
+  .topText {
+    font-size: 0.65rem;
+  }
+
+  .gamesGrid {
+    gap: 10px;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .section:hover {
+    transform: none;
+    border-color: #2a2a2a;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .section {
+    padding: 32px;
+    border-radius: 28px;
+  }
+
+  .gamesGrid {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .icon {
+    font-size: 2.8rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    max-width: 900px;
+  }
+
+  .topText {
+    font-size: 1rem;
+  }
+
+  .topIcon {
+    font-size: 1.4rem;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .section {
+    padding: 36px;
+    border-radius: 32px;
+  }
+
+  .gamesGrid {
+    gap: 28px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .description {
+    font-size: 1.05rem;
+    max-width: 1000px;
+  }
+}
+
+/* Планшети в альбомній орієнтації */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .gamesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    max-width: 90%;
   }
 }

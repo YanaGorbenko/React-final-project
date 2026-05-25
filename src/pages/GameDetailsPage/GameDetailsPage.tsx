@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { selectFilteredAllGames, useGamesStore } from '../../store/gameStore';
+import { selectAllGames, useGamesStore } from '../../store/gameStore';
 import { GameDetails } from '../../components/GameDetails/GameDetails';
 import css from './GameDetailsPage.module.css';
 
 export const GameDetailsPage = () => {
-  const games = useGamesStore(selectFilteredAllGames);
+  const games = useGamesStore(selectAllGames);
   const { gameId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();

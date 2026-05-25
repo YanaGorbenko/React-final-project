@@ -5,7 +5,7 @@
 }
 
 .container {
-  max-width: 1400px; /* збільшили ширину */
+  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 }
@@ -71,4 +71,237 @@
   height: 10px !important;
   border-radius: 50% !important;
   margin: 0 5px !important;
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .section {
+    padding: 50px 16px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 6%;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 16px;
+    background-size: 40%;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .section {
+    padding: 40px 16px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 8%;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 14px;
+    background-size: 35%;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 12px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 10%;
+    opacity: 0.5;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 12px;
+    background-size: 30%;
+  }
+
+  .carousel :global(.carousel-indicators) {
+    bottom: -35px;
+  }
+
+  .carousel :global(.carousel-indicators button) {
+    width: 8px !important;
+    height: 8px !important;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .section {
+    padding: 32px 12px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 12%;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 10px;
+    background-size: 25%;
+  }
+
+  .carousel :global(.carousel-indicators) {
+    bottom: -30px;
+  }
+
+  .carousel :global(.carousel-indicators button) {
+    width: 6px !important;
+    height: 6px !important;
+    margin: 0 4px !important;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .section {
+    padding: 24px 10px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 15%;
+    opacity: 0.4;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 8px;
+    background-size: 20%;
+  }
+
+  .carousel :global(.carousel-indicators) {
+    bottom: -25px;
+  }
+
+  .carousel :global(.carousel-indicators button) {
+    width: 5px !important;
+    height: 5px !important;
+    margin: 0 3px !important;
+  }
+}
+
+/* Планшети в альбомній орієнтації */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .section {
+    padding: 45px 20px;
+  }
+
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    width: 6%;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 48px;
+  }
+
+  .carousel :global(.carousel-control-prev-icon),
+  .carousel :global(.carousel-control-next-icon) {
+    padding: 24px;
+    background-size: 55%;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1800px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 56px;
+  }
+}
+
+/* Приховуємо стрілки на дуже маленьких екранах (опціонально) */
+@media (max-width: 480px) {
+  .carousel :global(.carousel-control-prev),
+  .carousel :global(.carousel-control-next) {
+    display: none;
+  }
+}
+
+/* Стилі для свайпу на мобільних (дотики) */
+@media (max-width: 768px) {
+  .carousel {
+    touch-action: pan-y pinch-zoom;
+  }
 }

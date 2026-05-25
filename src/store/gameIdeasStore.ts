@@ -40,14 +40,14 @@ export const useGameIdeasStore = create<GameIdeasStore>((set, get) => ({
 
   addNewIdea: async idea => {
     set({ isLoading: true, error: null });
-    const { ideas } = get();
+
     try {
       const newIdea = await addGameIdeas(idea);
-      const newIdeas = [...ideas, newIdea];
-      set({
-        ideas: newIdeas,
+      set(state => ({
+        ideas: [...state.ideas, newIdea],
+
         isLoading: false,
-      });
+      }));
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : 'Failed to fetch games',
@@ -57,9 +57,9 @@ export const useGameIdeasStore = create<GameIdeasStore>((set, get) => ({
   },
   changeIdeaVotes: async id => {
     set({ isLoading: true, error: null });
-    const { ideas } = get();
 
     try {
+      const { ideas } = get();
       const ideaToUpdate = ideas.find(idea => idea.id === id);
 
       if (!ideaToUpdate) {
@@ -72,12 +72,10 @@ export const useGameIdeasStore = create<GameIdeasStore>((set, get) => ({
 
       const newIdea = await changeVotes(updatedIdea);
 
-      const newIdeas = ideas.map(idea => (idea.id === id ? newIdea : idea));
-
-      set({
-        ideas: newIdeas,
+      set(state => ({
+        ideas: state.ideas.map(idea => (idea.id === id ? newIdea : idea)),
         isLoading: false,
-      });
+      }));
     } catch (error) {
       set({
         error:

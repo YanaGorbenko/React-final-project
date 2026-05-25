@@ -59,3 +59,255 @@
 .listItem {
   margin: 0;
 }
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .header {
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .listTitle {
+    font-size: 1.35rem;
+  }
+
+  .list {
+    gap: 18px;
+  }
+
+  .emptyState {
+    padding: 50px 35px;
+  }
+
+  .emptyIcon {
+    font-size: 3.5rem;
+  }
+
+  .emptyTitle {
+    font-size: 1.35rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .header {
+    margin-bottom: 18px;
+  }
+
+  .listTitle {
+    font-size: 1.25rem;
+  }
+
+  .list {
+    gap: 16px;
+  }
+
+  .emptyState {
+    padding: 45px 30px;
+    border-radius: 18px;
+  }
+
+  .emptyIcon {
+    font-size: 3rem;
+  }
+
+  .emptyTitle {
+    font-size: 1.25rem;
+  }
+
+  .emptyText {
+    font-size: 0.9rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 8px;
+  }
+
+  .listTitle {
+    font-size: 1.2rem;
+  }
+
+  .list {
+    gap: 14px;
+  }
+
+  .emptyState {
+    padding: 40px 25px;
+    border-radius: 16px;
+  }
+
+  .emptyIcon {
+    font-size: 2.8rem;
+  }
+
+  .emptyTitle {
+    font-size: 1.2rem;
+  }
+
+  .emptyText {
+    font-size: 0.85rem;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .header {
+    margin-bottom: 14px;
+  }
+
+  .listTitle {
+    font-size: 1.1rem;
+  }
+
+  .list {
+    gap: 12px;
+  }
+
+  .emptyState {
+    padding: 35px 20px;
+    border-radius: 14px;
+  }
+
+  .emptyIcon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .emptyTitle {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .emptyText {
+    font-size: 0.8rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .listTitle {
+    font-size: 1rem;
+  }
+
+  .count {
+    font-size: 0.9rem;
+  }
+
+  .list {
+    gap: 10px;
+  }
+
+  .emptyState {
+    padding: 30px 16px;
+    border-radius: 12px;
+  }
+
+  .emptyIcon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .emptyTitle {
+    font-size: 1rem;
+  }
+
+  .emptyText {
+    font-size: 0.75rem;
+  }
+}
+
+/* Дуже маленькі телефони (до 360px) */
+@media (max-width: 360px) {
+  .listTitle {
+    font-size: 0.9rem;
+  }
+
+  .emptyState {
+    padding: 25px 12px;
+  }
+
+  .emptyIcon {
+    font-size: 1.8rem;
+  }
+
+  .emptyTitle {
+    font-size: 0.9rem;
+  }
+
+  .emptyText {
+    font-size: 0.7rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .listTitle {
+    font-size: 1.75rem;
+  }
+
+  .count {
+    font-size: 1.2rem;
+  }
+
+  .list {
+    gap: 24px;
+  }
+
+  .emptyState {
+    padding: 70px 50px;
+    border-radius: 24px;
+  }
+
+  .emptyIcon {
+    font-size: 4.5rem;
+    margin-bottom: 20px;
+  }
+
+  .emptyTitle {
+    font-size: 1.75rem;
+    margin-bottom: 12px;
+  }
+
+  .emptyText {
+    font-size: 1rem;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .listTitle {
+    font-size: 2rem;
+  }
+
+  .list {
+    gap: 28px;
+  }
+
+  .emptyState {
+    padding: 80px 60px;
+  }
+
+  .emptyIcon {
+    font-size: 5rem;
+  }
+
+  .emptyTitle {
+    font-size: 2rem;
+  }
+}

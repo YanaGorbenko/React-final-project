@@ -17,3 +17,69 @@
   flex: 1;
   background-color: #0a0a0a;
 }
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .header {
+    border-bottom-width: 1px;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .header {
+    position: sticky;
+    top: 0;
+  }
+
+  .main {
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .header {
+    border-bottom-width: 0.5px;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .header {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Горизонтальна орієнтація на телефонах */
+@media (max-width: 896px) and (orientation: landscape) {
+  .header {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .header {
+    /* Трохи більша висота для зручності тапу на мобільних */
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .header {
+    border-bottom-width: 1.5px;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .header {
+    border-bottom-width: 1.5px;
+  }
+}

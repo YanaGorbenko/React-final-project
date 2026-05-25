@@ -6,8 +6,9 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .backButton {
@@ -35,4 +36,200 @@
 .backButton::before {
   content: '←';
   font-size: 1.1rem;
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .page {
+    padding: 35px 20px;
+  }
+
+  .container {
+    max-width: 1100px;
+    padding: 0 16px;
+  }
+
+  .backButton {
+    padding: 9px 18px;
+    font-size: 0.85rem;
+    margin-bottom: 28px;
+  }
+
+  .backButton::before {
+    font-size: 1rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .page {
+    padding: 30px 20px;
+  }
+
+  .container {
+    max-width: 960px;
+    padding: 0 16px;
+  }
+
+  .backButton {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+  }
+
+  .backButton::before {
+    font-size: 1rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .page {
+    padding: 25px 16px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .backButton {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    margin-bottom: 22px;
+  }
+
+  .backButton::before {
+    font-size: 0.95rem;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .page {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .backButton {
+    padding: 7px 14px;
+    font-size: 0.75rem;
+    margin-bottom: 20px;
+    gap: 6px;
+  }
+
+  .backButton::before {
+    font-size: 0.9rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .page {
+    padding: 16px 10px;
+  }
+
+  .container {
+    padding: 0 8px;
+  }
+
+  .backButton {
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    margin-bottom: 18px;
+    border-width: 1px;
+    gap: 5px;
+  }
+
+  .backButton::before {
+    font-size: 0.85rem;
+  }
+}
+
+/* Дуже маленькі телефони (до 360px) */
+@media (max-width: 360px) {
+  .page {
+    padding: 12px 8px;
+  }
+
+  .container {
+    padding: 0 6px;
+  }
+
+  .backButton {
+    padding: 5px 10px;
+    font-size: 0.65rem;
+    margin-bottom: 15px;
+  }
+
+  .backButton::before {
+    font-size: 0.8rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .page {
+    padding: 50px 20px;
+  }
+
+  .container {
+    max-width: 1600px;
+    padding: 0 30px;
+  }
+
+  .backButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+    margin-bottom: 35px;
+    border-width: 1.5px;
+  }
+
+  .backButton::before {
+    font-size: 1.2rem;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1920px) {
+  .page {
+    padding: 60px 20px;
+  }
+
+  .container {
+    max-width: 1800px;
+    padding: 0 40px;
+  }
+
+  .backButton {
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
+
+  .backButton::before {
+    font-size: 1.3rem;
+  }
+}
+
+/* Планшети в альбомній орієнтації */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .page {
+    padding: 30px 20px;
+  }
+
+  .backButton {
+    margin-bottom: 25px;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .backButton:hover {
+    transform: none;
+  }
 }

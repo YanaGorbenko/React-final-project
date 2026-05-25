@@ -1,3 +1,4 @@
+/* SelectedGamesPage.module.css */
 .page {
   min-height: 100vh;
   background: #0a0a0a;
@@ -8,6 +9,7 @@
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 .title {
@@ -25,24 +27,152 @@
   margin-bottom: 40px;
 }
 
-.content {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  flex-direction: row; /* ← Гарантуємо що рядок, а не колонка */
+/* Фільтри зверху, список знизу */
+.filtersSection {
+  width: 100%;
+  margin-bottom: 32px;
 }
 
-/* Адаптивність */
+.gamesSection {
+  width: 100%;
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+@media (max-width: 1024px) {
+  .page {
+    padding: 30px 16px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  .filtersSection {
+    margin-bottom: 28px;
+  }
+}
+
 @media (max-width: 768px) {
   .page {
-    padding: 20px;
+    padding: 20px 12px;
   }
 
   .title {
     font-size: 1.75rem;
   }
 
-  .content {
-    flex-direction: column; /* На мобільних стовпчиком */
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .filtersSection {
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page {
+    padding: 16px 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .filtersSection {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 12px 8px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+  }
+
+  .filtersSection {
+    margin-bottom: 16px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .page {
+    padding: 50px 20px;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 48px;
+  }
+
+  .filtersSection {
+    margin-bottom: 40px;
+  }
+}
+
+/* Для порожнього стану (немає обраних ігор) */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border-radius: 20px;
+  border: 1px solid #2a2a2a;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .emptyState {
+    padding: 40px 16px;
+  }
+
+  .emptyIcon {
+    font-size: 3rem;
+  }
+
+  .emptyTitle {
+    font-size: 1.2rem;
   }
 }

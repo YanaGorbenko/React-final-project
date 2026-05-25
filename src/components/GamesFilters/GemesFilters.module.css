@@ -1,5 +1,6 @@
+/* GemesFilters.module.css */
 .form {
-  width: 30%; /* ← 30% ширини */
+  width: 30%;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   border-radius: 16px;
   padding: 24px;
@@ -127,11 +128,263 @@
   color: white;
 }
 
-/* Адаптивність */
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .form {
+    width: 32%;
+    padding: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+    margin: 16px 0 10px 0;
+  }
+
+  .searchInput {
+    padding: 10px 14px;
+    font-size: 0.8rem;
+  }
+
+  .select {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .resetButton {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .form {
+    width: 35%;
+    padding: 18px;
+  }
+
+  .sectionTitle {
+    font-size: 1rem;
+  }
+
+  .genresList {
+    max-height: 200px;
+    gap: 8px;
+  }
+
+  .genreCheckbox {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Планшети малі та мобільні (до 768px) - горизонтальне розташування в кілька рядів */
 @media (max-width: 768px) {
   .form {
     width: 100%;
     position: static;
     margin-bottom: 24px;
+    padding: 16px;
+  }
+
+  /* Контейнер для горизонтальних фільтрів */
+  .filtersRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* Кожна група фільтрів */
+  .filterGroup {
+    flex: 1;
+    min-width: 200px;
+    background: rgba(26, 26, 26, 0.5);
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 0.85rem;
+    margin: 0 0 8px 0;
+    border-bottom-width: 1px;
+  }
+
+  .searchInput {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .select {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  /* Жанри - горизонтальний ряд */
+  .genresList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .genreLabel {
+    white-space: nowrap;
+    padding: 4px 12px;
+    background: #0a0a0a;
+    border-radius: 20px;
+    font-size: 0.7rem;
+  }
+
+  .resetButton {
+    margin-top: 16px;
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Телефони (576px - 768px) */
+@media (max-width: 576px) {
+  .form {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .filtersRow {
+    gap: 12px;
+  }
+
+  .filterGroup {
+    min-width: calc(50% - 12px);
+    flex: 1;
+    padding: 10px;
+  }
+
+  .sectionTitle {
+    font-size: 0.8rem;
+  }
+
+  .searchInput {
+    padding: 8px 10px;
+    font-size: 0.7rem;
+  }
+
+  .select {
+    padding: 6px 10px;
+    font-size: 0.7rem;
+  }
+
+  .genreLabel {
+    font-size: 0.65rem;
+    padding: 3px 10px;
+  }
+
+  .resetButton {
+    padding: 8px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .form {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .filtersRow {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filterGroup {
+    min-width: 100%;
+    padding: 10px;
+  }
+
+  .sectionTitle {
+    font-size: 0.75rem;
+  }
+
+  .searchInput {
+    padding: 6px 8px;
+    font-size: 0.65rem;
+  }
+
+  .select {
+    padding: 5px 8px;
+    font-size: 0.65rem;
+  }
+
+  .genreLabel {
+    font-size: 0.6rem;
+    padding: 2px 8px;
+  }
+
+  .resetButton {
+    padding: 6px;
+    font-size: 0.65rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .form {
+    width: 28%;
+    padding: 28px;
+    border-radius: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.35rem;
+    margin: 24px 0 14px 0;
+  }
+
+  .searchInput {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+  }
+
+  .select {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+
+  .genresList {
+    gap: 12px;
+    max-height: 280px;
+  }
+
+  .genreLabel {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+
+  .genreCheckbox {
+    width: 20px;
+    height: 20px;
+  }
+
+  .resetButton {
+    padding: 14px;
+    font-size: 0.9rem;
+    margin-top: 28px;
+  }
+}
+
+/* Для сенсорних екранів */
+@media (hover: none) {
+  .genreLabel:hover {
+    background: transparent;
+    color: #ccc;
+  }
+
+  .resetButton:hover {
+    background: transparent;
+    color: #e63946;
   }
 }

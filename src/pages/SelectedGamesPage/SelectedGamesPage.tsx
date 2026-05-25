@@ -42,17 +42,27 @@ export const SelectedGamesPage = () => {
   return (
     <div className={css.page}>
       <div className={css.container}>
-        <h1 className={css.title}>Усі ігри</h1>
+        <h1 className={css.title}>Обрані ігри</h1>
         <h2 className={css.subtitle}>
-          Відкрийте для себе нашу повну колекцію ігор
+          Ваша персональна колекція улюблених ігор
         </h2>
+
         <Loader isLoading={isLoading} />
+
         {!isLoading && !isError && (
-          <div className={css.content}>
-            <GamesList games={games} />
-            <GamesFilters params={params} functions={functions} />{' '}
-          </div>
+          <>
+            {/* Фільтри ЗВЕРХУ */}
+            <div className={css.filtersSection}>
+              <GamesFilters params={params} functions={functions} />
+            </div>
+
+            {/* Список обраних ігор ЗНИЗУ */}
+            <div className={css.gamesSection}>
+              <GamesList games={games} />
+            </div>
+          </>
         )}
+
         {isError && <Error error={isError} />}
       </div>
     </div>

@@ -106,3 +106,241 @@
   color: #6c757d;
   font-size: 0.75rem;
 }
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .card {
+    padding: 20px;
+  }
+
+  .rankIcon {
+    font-size: 1.75rem;
+  }
+
+  .rankNumber {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .meta {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .genre {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+
+  .author {
+    font-size: 0.75rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .footer {
+    margin-bottom: 16px;
+    padding-top: 12px;
+  }
+
+  .votesCount {
+    font-size: 0.8rem;
+  }
+
+  .date {
+    font-size: 0.7rem;
+  }
+}
+
+/* Планшети малі (768px) */
+@media (max-width: 768px) {
+  .card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .rank {
+    margin-bottom: 12px;
+  }
+
+  .rankIcon {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .meta {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+  }
+
+  .footer {
+    margin-bottom: 14px;
+    padding-top: 10px;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .rankIcon {
+    font-size: 1.35rem;
+  }
+
+  .rankNumber {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+  }
+
+  .genre {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+  }
+
+  .author {
+    font-size: 0.7rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
+    margin-bottom: 12px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding-top: 10px;
+  }
+
+  .votes {
+    gap: 4px;
+  }
+
+  .votesIcon {
+    font-size: 0.9rem;
+  }
+
+  .votesCount {
+    font-size: 0.75rem;
+  }
+
+  .date {
+    font-size: 0.65rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .rankIcon {
+    font-size: 1.2rem;
+  }
+
+  .rankNumber {
+    font-size: 0.65rem;
+    padding: 2px 5px;
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .meta {
+    gap: 6px;
+  }
+
+  .genre {
+    font-size: 0.6rem;
+    padding: 2px 6px;
+  }
+
+  .author {
+    font-size: 0.65rem;
+  }
+
+  .description {
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .votesCount {
+    font-size: 0.7rem;
+  }
+
+  .date {
+    font-size: 0.6rem;
+  }
+}
+
+/* Для сенсорних екранів - зменшуємо ефект наведення */
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+    border-color: #2a2a2a;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю */
+@media (min-width: 1400px) {
+  .card {
+    padding: 28px;
+    border-radius: 24px;
+  }
+
+  .rankIcon {
+    font-size: 2.2rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .genre {
+    font-size: 0.8rem;
+  }
+
+  .author {
+    font-size: 0.85rem;
+  }
+
+  .votesCount {
+    font-size: 0.9rem;
+  }
+}

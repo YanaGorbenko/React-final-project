@@ -46,13 +46,23 @@ export const AllGamesPage = () => {
         <h2 className={css.subtitle}>
           Відкрийте для себе нашу повну колекцію ігор
         </h2>
+
         <Loader isLoading={isLoading} />
+
         {!isLoading && !isError && (
-          <div className={css.content}>
-            <GamesList games={games} />
-            <GamesFilters params={params} functions={functions} />{' '}
-          </div>
+          <>
+            {/* Фільтри ЗВЕРХУ */}
+            <div className={css.filtersSection}>
+              <GamesFilters params={params} functions={functions} />
+            </div>
+
+            {/* Список ігор ЗНИЗУ */}
+            <div className={css.gamesSection}>
+              <GamesList games={games} />
+            </div>
+          </>
         )}
+
         {isError && <Error error={isError} />}
       </div>
     </div>

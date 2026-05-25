@@ -9,7 +9,7 @@
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
   width: 100%;
@@ -122,4 +122,325 @@
 
 .image:hover {
   transform: scale(1.02);
+}
+
+/* ========== АДАПТАЦІЯ ========== */
+
+/* Ноутбуки (1024px - 1280px) */
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1100px;
+    padding: 1.75rem;
+  }
+
+  .content {
+    gap: 3rem;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .gameTitle {
+    font-size: 1.75rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+}
+
+/* Планшети (768px - 1024px) */
+@media (max-width: 1024px) {
+  .section {
+    min-height: auto;
+    padding: 4rem 0;
+  }
+
+  .container {
+    max-width: 960px;
+    padding: 1.5rem;
+  }
+
+  .content {
+    gap: 2.5rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .gameTitle {
+    font-size: 1.5rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .rating,
+  .genre {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Планшети малі / Великі телефони (768px) */
+@media (max-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  .content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .textContent {
+    text-align: center;
+  }
+
+  .badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .gameTitle {
+    font-size: 1.35rem;
+  }
+
+  .meta {
+    justify-content: center;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .button {
+    margin: 0 auto;
+  }
+
+  .imageContent {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+
+  .image {
+    max-width: 80%;
+  }
+}
+
+/* Телефони (480px - 768px) */
+@media (max-width: 576px) {
+  .section {
+    padding: 2rem 0;
+  }
+
+  .container {
+    padding: 0.75rem;
+  }
+
+  .content {
+    gap: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .gameTitle {
+    font-size: 1.2rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.8rem;
+  }
+
+  .rating,
+  .genre {
+    font-size: 0.85rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+
+  .button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .image {
+    max-width: 100%;
+  }
+
+  .meta {
+    gap: 0.75rem;
+  }
+}
+
+/* Маленькі телефони (до 480px) */
+@media (max-width: 480px) {
+  .section {
+    padding: 1.5rem 0;
+    min-height: auto;
+  }
+
+  .title {
+    font-size: 1.25rem;
+  }
+
+  .gameTitle {
+    font-size: 1rem;
+  }
+
+  .badge {
+    font-size: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .rating,
+  .genre {
+    font-size: 0.75rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .meta {
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Вертикальна орієнтація на телефонах */
+@media (max-width: 768px) and (orientation: portrait) {
+  .section {
+    min-height: auto;
+  }
+
+  .image {
+    max-width: 70%;
+  }
+}
+
+/* Горизонтальна орієнтація на телефонах */
+@media (max-width: 896px) and (orientation: landscape) {
+  .section {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+
+  .content {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .gameTitle {
+    font-size: 1.25rem;
+  }
+
+  .image {
+    max-width: 90%;
+  }
+}
+
+/* Планшети в альбомній орієнтації */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .gameTitle {
+    font-size: 1.4rem;
+  }
+
+  .content {
+    gap: 2rem;
+  }
+}
+
+/* Великі десктопи (понад 1400px) */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .gameTitle {
+    font-size: 2.2rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .button {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Для екранів з високою роздільною здатністю (Retina) */
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px;
+  }
+
+  .title {
+    font-size: 4.5rem;
+  }
+
+  .gameTitle {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1.3rem;
+  }
 }
