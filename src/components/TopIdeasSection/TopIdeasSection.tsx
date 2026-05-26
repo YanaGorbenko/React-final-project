@@ -8,11 +8,10 @@ import css from './TopIdeasSection.module.css';
 export const TopIdeasSection = () => {
   const gameIdeas = useGameIdeasStore(selectGamesIdeas);
 
-  // Отримуємо топ-3 ідеї за кількістю голосів
   const topIdeas = [...gameIdeas].sort((a, b) => b.votes - a.votes).slice(0, 3);
 
   if (topIdeas.length === 0) {
-    return null; // Якщо немає ідей, секція не відображається
+    return null;
   }
   return (
     <section className={css.section}>

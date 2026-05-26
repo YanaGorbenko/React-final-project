@@ -238,38 +238,3 @@
     margin-bottom: 28px;
   }
 }
-
-/* Для екранів з високою роздільною здатністю */
-@media (min-width: 1920px) {
-  .container {
-    min-height: 600px;
-  }
-
-  .content {
-    max-width: 600px;
-    padding: 56px;
-    border-radius: 32px;
-  }
-
-  .icon {
-    font-size: 5rem;
-    margin-bottom: 24px;
-  }
-
-  .title {
-    font-size: 2rem;
-    margin-bottom: 16px;
-  }
-
-  .message {
-    font-size: 1.1rem;
-    margin-bottom: 32px;
-  }
-}
-
-/* Для сенсорних екранів */
-@media (hover: none) {
-  .retryButton:hover {
-    transform: none;
-  }
-}

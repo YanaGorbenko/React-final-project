@@ -31,7 +31,6 @@
   margin-bottom: 8px;
 }
 
-/* Стилі для полів з помилкою */
 .inputError,
 .textareaError {
   width: 100%;
@@ -76,13 +75,11 @@
   font-family: inherit;
 }
 
-/* Стилі для react-select з помилкою */
 .selectError :global(.react-select__control) {
   border-color: #e63946 !important;
   box-shadow: 0 0 0 1px #e63946 !important;
 }
 
-/* Стилі для повідомлення про помилку */
 .error {
   color: #e63946;
   font-size: 0.75rem;
@@ -118,8 +115,6 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-/* ========== АДАПТАЦІЯ ========== */
 
 /* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {

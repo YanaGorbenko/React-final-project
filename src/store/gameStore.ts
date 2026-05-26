@@ -206,17 +206,14 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     try {
       const { selectedFilters } = get();
 
-      // Запит на бекенд (пошук + сортування для всіх ігор)
       let allFiltered = await getGames({
         searchWord: selectedFilters.searchWord,
         sortByTitle: selectedFilters.sortByTitle,
         sortByRating: selectedFilters.sortByRating,
       });
 
-      // Фільтруємо тільки обрані
       let filtered = allFiltered.filter(game => game.isFavorite);
 
-      // ТІЛЬКИ фільтрація за жанрами на фронтенді
       if (selectedFilters.genresFilter.length > 0) {
         filtered = filtered.filter(game =>
           selectedFilters.genresFilter.includes(game.genre),
@@ -275,7 +272,6 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   },
 }));
 
-// Селектори (без змін)
 export const selectFilteredAllGames = (state: GamesStore) =>
   state.filteredAllGames;
 export const selectAllSearchWord = (state: GamesStore) =>

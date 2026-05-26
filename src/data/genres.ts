@@ -1,4 +1,3 @@
-// data/genres.ts
 import { type Genre } from '../types/genre';
 
 export const GENRES: Genre[] = [

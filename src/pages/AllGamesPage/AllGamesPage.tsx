@@ -51,12 +51,10 @@ export const AllGamesPage = () => {
 
         {!isLoading && !isError && (
           <>
-            {/* Фільтри ЗВЕРХУ */}
             <div className={css.filtersSection}>
               <GamesFilters params={params} functions={functions} />
             </div>
 
-            {/* Список ігор ЗНИЗУ */}
             <div className={css.gamesSection}>
               <GamesList games={games} />
             </div>

@@ -4,7 +4,7 @@ import css from './HeroSection.module.css';
 
 export const HeroSection = () => {
   const getTopGame = useGamesStore(selectGetTopRatedGame);
-  const topGame = getTopGame(); // тепер тут завжди будуть дані!
+  const topGame = getTopGame();
   const navigate = useNavigate();
 
   return (
