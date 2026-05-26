@@ -6,7 +6,7 @@
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1600px;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -27,25 +27,39 @@
   margin-bottom: 40px;
 }
 
-/* Фільтри зверху, список знизу */
+/* Десктоп: фільтри зліва, список справа */
+.content {
+  display: flex;
+  gap: 24px;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
 .filtersSection {
-  width: 100%;
-  margin-bottom: 32px;
+  width: 320px;
+  flex-shrink: 0;
 }
 
 .gamesSection {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 /* ========== АДАПТАЦІЯ ========== */
 
+/* Планшети та мобільні: фільтри зверху */
 @media (max-width: 1024px) {
   .page {
     padding: 30px 16px;
   }
 
+  .container {
+    padding: 0 16px;
+  }
+
   .title {
     font-size: 2rem;
+    margin-bottom: 6px;
   }
 
   .subtitle {
@@ -53,8 +67,17 @@
     margin-bottom: 32px;
   }
 
+  .content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
   .filtersSection {
-    margin-bottom: 28px;
+    width: 100%;
+  }
+
+  .gamesSection {
+    width: 100%;
   }
 }
 
@@ -72,8 +95,8 @@
     margin-bottom: 24px;
   }
 
-  .filtersSection {
-    margin-bottom: 24px;
+  .content {
+    gap: 24px;
   }
 }
 
@@ -91,8 +114,8 @@
     margin-bottom: 20px;
   }
 
-  .filtersSection {
-    margin-bottom: 20px;
+  .content {
+    gap: 20px;
   }
 }
 
@@ -110,8 +133,8 @@
     margin-bottom: 16px;
   }
 
-  .filtersSection {
-    margin-bottom: 16px;
+  .content {
+    gap: 16px;
   }
 }
 
@@ -122,6 +145,7 @@
 
   .title {
     font-size: 2.8rem;
+    margin-bottom: 10px;
   }
 
   .subtitle {
@@ -129,7 +153,11 @@
     margin-bottom: 48px;
   }
 
+  .content {
+    gap: 32px;
+  }
+
   .filtersSection {
-    margin-bottom: 40px;
+    width: 360px;
   }
 }

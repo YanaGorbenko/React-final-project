@@ -1,14 +1,13 @@
 /* GamesList.module.css */
 .container {
-  width: 70%;
-  padding-right: 24px;
+  width: 100%;
+  padding-right: 0;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 240px));
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
   gap: 20px;
-  justify-content: center;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -42,26 +41,16 @@
 
 /* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {
-  .container {
-    width: 65%;
-    padding-right: 20px;
-  }
-
   .grid {
-    grid-template-columns: repeat(3, minmax(180px, 220px));
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
     gap: 16px;
   }
 }
 
 /* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
-  .container {
-    width: 60%;
-    padding-right: 16px;
-  }
-
   .grid {
-    grid-template-columns: repeat(2, minmax(200px, 240px));
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
     gap: 16px;
   }
 }
@@ -70,12 +59,11 @@
 @media (max-width: 768px) {
   .container {
     width: 100%;
-    padding-right: 0;
     margin-bottom: 24px;
   }
 
   .grid {
-    grid-template-columns: repeat(2, minmax(180px, 220px));
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
     gap: 14px;
   }
 }
@@ -83,7 +71,7 @@
 /* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .grid {
-    grid-template-columns: repeat(2, minmax(160px, 200px));
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
     gap: 12px;
   }
 
@@ -103,7 +91,7 @@
 /* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .grid {
-    grid-template-columns: repeat(1, minmax(200px, 260px));
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
     gap: 16px;
   }
 
@@ -134,33 +122,16 @@
 
 /* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
-  .container {
-    width: 70%;
-    padding-right: 28px;
-  }
-
   .grid {
-    grid-template-columns: repeat(3, minmax(220px, 260px));
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
     gap: 24px;
-  }
-}
-
-/* Для екранів з високою роздільною здатністю */
-@media (min-width: 1920px) {
-  .container {
-    width: 75%;
-  }
-
-  .grid {
-    grid-template-columns: repeat(3, minmax(240px, 280px));
-    gap: 28px;
   }
 }
 
 /* Планшети в альбомній орієнтації */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .grid {
-    grid-template-columns: repeat(3, minmax(180px, 220px));
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
   }
 }
 

@@ -50,7 +50,7 @@ export const SelectedGamesPage = () => {
         <Loader isLoading={isLoading} />
 
         {!isLoading && !isError && (
-          <>
+          <div className={css.content}>
             <div className={css.filtersSection}>
               <GamesFilters params={params} functions={functions} />
             </div>
@@ -58,7 +58,7 @@ export const SelectedGamesPage = () => {
             <div className={css.gamesSection}>
               <GamesList games={games} />
             </div>
-          </>
+          </div>
         )}
 
         {isError && <Error error={isError} />}
