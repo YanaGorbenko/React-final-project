@@ -137,12 +137,24 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   },
 
   setAllSortByTitle: sort => {
-    set({ allFilters: { ...get().allFilters, sortByTitle: sort } });
+    set({
+      allFilters: {
+        ...get().allFilters,
+        sortByTitle: sort,
+        sortByRating: 'not',
+      },
+    });
     get().applyAllFilters();
   },
 
   setAllSortByRating: sort => {
-    set({ allFilters: { ...get().allFilters, sortByRating: sort } });
+    set({
+      allFilters: {
+        ...get().allFilters,
+        sortByRating: sort,
+        sortByTitle: 'not',
+      },
+    });
     get().applyAllFilters();
   },
 
@@ -185,12 +197,24 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   },
 
   setSelectedSortByTitle: sort => {
-    set({ selectedFilters: { ...get().selectedFilters, sortByTitle: sort } });
+    set({
+      selectedFilters: {
+        ...get().selectedFilters,
+        sortByTitle: sort,
+        sortByRating: 'not',
+      },
+    });
     get().applySelectedFilters();
   },
 
   setSelectedSortByRating: sort => {
-    set({ selectedFilters: { ...get().selectedFilters, sortByRating: sort } });
+    set({
+      selectedFilters: {
+        ...get().selectedFilters,
+        sortByRating: sort,
+        sortByTitle: 'not',
+      },
+    });
     get().applySelectedFilters();
   },
 

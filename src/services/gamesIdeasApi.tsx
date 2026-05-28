@@ -19,6 +19,6 @@ export const addGameIdeas = async (
 };
 
 export const changeVotes = async (idea: GameIdea): Promise<GameIdea> => {
-  const { data } = await axios.put(`/gameIdeas/${idea.id}`, idea);
+  const { data } = await axios.put<GameIdea>(`/gameIdeas/${idea.id}`, idea);
   return data;
 };

@@ -109,7 +109,6 @@ export const GamesFilters = ({ params, functions }: Props) => {
     (option: any) => {
       if (option) {
         functions.changeTitleSort(option.value);
-        functions.changeRatingSort('not');
       }
     },
     [functions],
@@ -119,7 +118,6 @@ export const GamesFilters = ({ params, functions }: Props) => {
     (option: any) => {
       if (option) {
         functions.changeRatingSort(option.value);
-        functions.changeTitleSort('not');
       }
     },
     [functions],
