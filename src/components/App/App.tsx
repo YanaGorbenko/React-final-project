@@ -8,6 +8,7 @@ import { GameIdeasPage } from '../../pages/GameIdeasPage/GameIdeasPage';
 import { ProfilePage } from '../../pages/ProfilePage/ProfilePage';
 import { FavoritesTab } from '../FavoritesTab/FavoritesTab';
 import { MyIdeasSection } from '../MyIdeasSection/MyIdeasSection';
+import { ProtectedRoute } from '../PtotectedRoute/PtotectedRoute';
 
 export const App = () => {
   return (
@@ -17,9 +18,12 @@ export const App = () => {
         <Route path="/games" element={<AllGamesPage />} />
         <Route path="/genres" element={<GenresPage />} />
         <Route path="/gameIdeas" element={<GameIdeasPage />} />
-        <Route path="/profile" element={<ProfilePage />}>
-          <Route path="favorites" element={<FavoritesTab />} />
-          <Route path="my-ideas" element={<MyIdeasSection />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/profile" element={<ProfilePage />}>
+            <Route index element={<FavoritesTab />} />
+            <Route path="favorites" element={<FavoritesTab />} />
+            <Route path="my-ideas" element={<MyIdeasSection />} />
+          </Route>
         </Route>
         <Route path="/:gameId/details" element={<GameDetailsPage />} />
       </Route>

@@ -54,17 +54,20 @@ export const NewGameItem = ({ game }: Props) => {
             : game.description}
         </p>
         <div className={css.footer}>
-          <button
-            className={`${css.favoriteBtn} ${isFavorite ? css.favoriteActive : css.favoriteInactive}`}
-            onClick={handleToggleFavorite}
-            disabled={isLoading}
-          >
-            {isLoading
-              ? '⏳'
-              : isFavorite
-                ? '❤️ Прибрати з обраного'
-                : '♡ Додати в обране'}
-          </button>
+          {isAuth && (
+            <button
+              className={`${css.favoriteBtn} ${isFavorite ? css.favoriteActive : css.favoriteInactive}`}
+              onClick={handleToggleFavorite}
+              disabled={isLoading}
+            >
+              {isLoading
+                ? '⏳'
+                : isFavorite
+                  ? '❤️ Прибрати з обраного'
+                  : '♡ Додати в обране'}
+            </button>
+          )}
+
           <button
             className={css.button}
             onClick={() =>
