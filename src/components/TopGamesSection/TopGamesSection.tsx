@@ -14,7 +14,7 @@ export const TopGamesSection = () => {
         </h3>
         <ul className={css.grid}>
           {topGames.map(game => (
-            <li key={game.id} className={css.gridItem}>
+            <li key={game._id} className={css.gridItem}>
               <GameItem game={game} />
             </li>
           ))}

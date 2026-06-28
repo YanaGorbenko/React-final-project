@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import {
-  selectChangeIdeasVotes,
   useGameIdeasStore,
+  selectToggleVote,
 } from '../../store/gameIdeasStore';
+import { useAuthStore, selectUser } from '../../store/authStore';
 import type { GameIdea } from '../../types/gameIdea';
 import css from './GameIdeasItem.module.css';
 
@@ -10,10 +12,65 @@ interface Props {
 }
 
 export const GameIdeasItem = ({ idea }: Props) => {
-  const changeVotes = useGameIdeasStore(selectChangeIdeasVotes);
+  const toggleVote = useGameIdeasStore(selectToggleVote);
+  const currentUser = useAuthStore(selectUser);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOwnIdea, setIsOwnIdea] = useState(false);
+  const [hasVoted, setHasVoted] = useState(false);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('uk-UA');
+  useEffect(() => {
+    const userId = currentUser?._id || null;
+
+    const getAuthorId = (author: any): string => {
+      if (!author) return '';
+      if (typeof author === 'object') return author._id || '';
+      return String(author);
+    };
+
+    const authorId = getAuthorId(idea.authorId);
+    const isOwn = userId === authorId;
+
+    setIsOwnIdea(isOwn);
+
+    const hasUserVoted =
+      userId && idea.voters ? idea.voters.includes(userId) : false;
+    setHasVoted(hasUserVoted);
+  }, [currentUser, idea]);
+
+  const getAuthorName = (author: any): string => {
+    if (!author) return 'Невідомий автор';
+    if (typeof author === 'object') return author.name || 'Невідомий автор';
+    return String(author);
+  };
+
+  const getAuthorPhoto = (author: any): string | undefined => {
+    if (!author) return undefined;
+    if (typeof author === 'object') return author.photo;
+    return undefined;
+  };
+
+  const authorName = getAuthorName(idea.authorId);
+  const authorPhoto = getAuthorPhoto(idea.authorId);
+
+  const handleToggleVote = async () => {
+    if (!currentUser) {
+      alert('Будь ласка, увійдіть, щоб проголосувати');
+      return;
+    }
+
+    if (isOwnIdea) {
+      alert('Ви не можете голосувати за свою ідею');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await toggleVote(idea._id);
+    } catch (error) {
+      console.error('❌ Помилка:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -27,11 +84,20 @@ export const GameIdeasItem = ({ idea }: Props) => {
         </div>
         <div className={css.metaItem}>
           <span className={css.metaLabel}>Автор:</span>
-          <span className={css.metaValue}>{idea.userName}</span>
-        </div>
-        <div className={css.metaItem}>
-          <span className={css.metaLabel}>Дата:</span>
-          <span className={css.metaValue}>{formatDate(idea.createdAt)}</span>
+          <div className={css.authorInfo}>
+            {authorPhoto && (
+              <img
+                src={authorPhoto}
+                alt={authorName}
+                className={css.avatar}
+                onError={e => {
+                  (e.target as HTMLImageElement).src =
+                    'https://cdn-icons-png.flaticon.com/512/4837/4837857.png';
+                }}
+              />
+            )}
+            <span className={css.metaValue}>{authorName}</span>
+          </div>
         </div>
       </div>
 
@@ -40,11 +106,28 @@ export const GameIdeasItem = ({ idea }: Props) => {
       <div className={css.footer}>
         <div className={css.votes}>
           <span className={css.votesIcon}>👍</span>
-          <span className={css.votesCount}>{idea.votes} голосів</span>
+          <span className={css.votesCount}>{idea.votes || 0} голосів</span>
         </div>
-        <button className={css.voteButton} onClick={() => changeVotes(idea.id)}>
-          Проголосувати
-        </button>
+
+        {isOwnIdea && <span className={css.ownBadge}>👤 Ваша ідея</span>}
+
+        {!isOwnIdea && currentUser && (
+          <button
+            className={`${css.voteButton} ${hasVoted ? css.voted : ''}`}
+            onClick={handleToggleVote}
+            disabled={isLoading}
+          >
+            {isLoading
+              ? '⏳...'
+              : hasVoted
+                ? '🗳️ Прибрати голос'
+                : '🗳️ Проголосувати'}
+          </button>
+        )}
+
+        {!isOwnIdea && !currentUser && (
+          <span className={css.loginBadge}>🔒 Увійдіть, щоб голосувати</span>
+        )}
       </div>
     </div>
   );

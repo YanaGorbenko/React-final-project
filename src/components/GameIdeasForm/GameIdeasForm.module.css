@@ -1,234 +1,218 @@
-/* GameIdeasForm.module.css */
-.form {
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+  padding: 16px;
+}
+
+.modal {
   background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
   border-radius: 20px;
-  padding: 24px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
   border: 1px solid #2a2a2a;
-  position: sticky;
-  top: 20px;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.modal::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: #e63946;
+  border-radius: 2px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 8px;
+}
+
+.closeButton:hover {
+  color: #e63946;
+  background: rgba(230, 57, 70, 0.1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 
 .formTitle {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: white;
-  margin: 0 0 20px 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
 .formGroup {
-  margin-bottom: 20px;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .label {
-  display: block;
-  color: #9ca3af;
+  color: #e5e7eb;
   font-size: 0.85rem;
   font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.inputError,
-.textareaError {
-  width: 100%;
-  padding: 12px;
-  background: #0a0a0a;
-  border: 1px solid #e63946;
-  border-radius: 10px;
-  color: white;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.inputError:focus,
-.textareaError:focus {
-  outline: none;
-  border-color: #e63946;
-  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.3);
+  letter-spacing: 0.3px;
 }
 
 .input,
 .textarea {
-  width: 100%;
-  padding: 12px;
-  background: #0a0a0a;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  color: white;
-  font-size: 0.9rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #2a2a2a;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
-}
-
-.input:focus,
-.textarea:focus {
   outline: none;
-  border-color: #e63946;
-  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
 }
 
 .textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+}
+
+.inputError,
+.textareaError {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #e63946;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
   font-family: inherit;
 }
 
-.selectError :global(.react-select__control) {
-  border-color: #e63946 !important;
-  box-shadow: 0 0 0 1px #e63946 !important;
+.textareaError {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.inputError:focus,
+.textareaError:focus {
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.25);
 }
 
 .error {
   color: #e63946;
-  font-size: 0.75rem;
-  margin-top: 6px;
-  margin-bottom: 0;
-  padding-left: 12px;
-  border-left: 2px solid #e63946;
-  background: rgba(230, 57, 70, 0.1);
-  border-radius: 4px;
-  line-height: 1.4;
+  font-size: 0.8rem;
+  margin: 4px 0 0 0;
+  padding-left: 4px;
+}
+
+.selectError :global(.react-select__control) {
+  border-color: #e63946 !important;
 }
 
 .submitButton {
-  width: 100%;
-  background: #e63946;
-  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
   border: none;
-  padding: 12px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #e63946 0%, #c62828 100%);
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 8px;
+  letter-spacing: 0.5px;
 }
 
 .submitButton:hover:not(:disabled) {
-  background: #c1121f;
   transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
 }
 
 .submitButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none;
 }
 
-/* Ноутбуки (1024px - 1280px) */
-@media (max-width: 1280px) {
-  .form {
-    padding: 20px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 24px 20px;
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .closeButton {
+    top: 12px;
+    right: 16px;
+    font-size: 20px;
   }
 
   .formTitle {
     font-size: 1.2rem;
-    margin-bottom: 18px;
-  }
-
-  .formGroup {
-    margin-bottom: 18px;
-  }
-
-  .label {
-    font-size: 0.8rem;
-  }
-
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 10px;
-    font-size: 0.85rem;
-  }
-
-  .textarea {
-    min-height: 90px;
-  }
-
-  .submitButton {
-    padding: 10px;
-    font-size: 0.95rem;
-  }
-}
-
-/* Планшети (768px - 1024px) */
-@media (max-width: 1024px) {
-  .form {
-    padding: 18px;
-    border-radius: 16px;
-  }
-
-  .formTitle {
-    font-size: 1.15rem;
-    margin-bottom: 16px;
-  }
-
-  .formGroup {
-    margin-bottom: 16px;
-  }
-
-  .label {
-    font-size: 0.75rem;
-  }
-
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 9px 12px;
-    font-size: 0.8rem;
-    border-radius: 8px;
-  }
-
-  .error {
-    font-size: 0.7rem;
-    padding-left: 10px;
-  }
-
-  .submitButton {
-    padding: 9px;
-    font-size: 0.9rem;
-  }
-}
-
-/* Планшети малі (768px) */
-@media (max-width: 768px) {
-  .form {
-    position: static;
-    padding: 16px;
-    margin-bottom: 20px;
-  }
-
-  .formTitle {
-    font-size: 1.1rem;
-    margin-bottom: 14px;
-  }
-
-  .formGroup {
-    margin-bottom: 14px;
-  }
-}
-
-/* Телефони (480px - 768px) */
-@media (max-width: 576px) {
-  .form {
-    padding: 16px;
-    border-radius: 14px;
-  }
-
-  .formTitle {
-    font-size: 1rem;
-    margin-bottom: 14px;
-  }
-
-  .formGroup {
-    margin-bottom: 14px;
-  }
-
-  .label {
-    font-size: 0.7rem;
   }
 
   .input,
@@ -236,175 +220,11 @@
   .inputError,
   .textareaError {
     padding: 8px 12px;
-    font-size: 0.75rem;
-  }
-
-  .textarea {
-    min-height: 80px;
-  }
-
-  .error {
-    font-size: 0.65rem;
-    padding-left: 8px;
-  }
-
-  .submitButton {
-    padding: 10px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Маленькі телефони (до 480px) */
-@media (max-width: 480px) {
-  .form {
-    padding: 14px;
-    border-radius: 12px;
-  }
-
-  .formTitle {
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-  }
-
-  .formGroup {
-    margin-bottom: 12px;
-  }
-
-  .label {
-    font-size: 0.65rem;
-  }
-
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 7px 10px;
-    font-size: 0.7rem;
-    border-radius: 6px;
-  }
-
-  .textarea {
-    min-height: 70px;
-  }
-
-  .error {
-    font-size: 0.6rem;
-    padding-left: 6px;
-  }
-
-  .submitButton {
-    padding: 8px;
-    font-size: 0.8rem;
-    border-radius: 6px;
-  }
-}
-
-/* Дуже маленькі телефони (до 360px) */
-@media (max-width: 360px) {
-  .form {
-    padding: 12px;
-  }
-
-  .formTitle {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-  }
-
-  .formGroup {
-    margin-bottom: 10px;
-  }
-
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 6px 8px;
-    font-size: 0.65rem;
-  }
-
-  .submitButton {
-    padding: 7px;
-    font-size: 0.75rem;
-  }
-}
-
-/* Великі десктопи (понад 1400px) */
-@media (min-width: 1400px) {
-  .form {
-    padding: 28px;
-    border-radius: 24px;
-  }
-
-  .formTitle {
-    font-size: 1.5rem;
-    margin-bottom: 24px;
-  }
-
-  .formGroup {
-    margin-bottom: 24px;
-  }
-
-  .label {
     font-size: 0.9rem;
   }
 
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 14px;
-    font-size: 0.95rem;
-    border-radius: 12px;
-  }
-
-  .textarea {
-    min-height: 120px;
-  }
-
-  .error {
-    font-size: 0.8rem;
-    padding-left: 14px;
-  }
-
   .submitButton {
-    padding: 14px;
-    font-size: 1rem;
-    border-radius: 12px;
-  }
-}
-
-/* Для екранів з високою роздільною здатністю */
-@media (min-width: 1920px) {
-  .form {
-    padding: 32px;
-    border-radius: 28px;
-  }
-
-  .formTitle {
-    font-size: 1.6rem;
-  }
-
-  .label {
-    font-size: 1rem;
-  }
-
-  .input,
-  .textarea,
-  .inputError,
-  .textareaError {
-    padding: 16px;
-    font-size: 1rem;
-  }
-
-  .submitButton {
-    padding: 16px;
-    font-size: 1.1rem;
-  }
-}
-
-/* Для сенсорних екранів */
-@media (hover: none) {
-  .submitButton:hover:not(:disabled) {
-    transform: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
   }
 }

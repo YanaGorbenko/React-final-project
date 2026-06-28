@@ -1,4 +1,3 @@
-/* AllGamesPage.module.css */
 .page {
   min-height: 100vh;
   background: #0a0a0a;
@@ -27,27 +26,20 @@
   margin-bottom: 40px;
 }
 
-/* Десктоп: фільтри зліва, список справа */
 .content {
   display: flex;
+  flex-direction: column;
   gap: 24px;
-  flex-direction: row;
-  align-items: flex-start;
 }
 
 .filtersSection {
-  width: 320px;
-  flex-shrink: 0;
+  width: 100%;
 }
 
 .gamesSection {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
-
-/* Планшети та мобільні: фільтри зверху */
 @media (max-width: 1024px) {
   .page {
     padding: 30px 16px;
@@ -68,16 +60,7 @@
   }
 
   .content {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .filtersSection {
-    width: 100%;
-  }
-
-  .gamesSection {
-    width: 100%;
+    gap: 20px;
   }
 }
 
@@ -96,7 +79,7 @@
   }
 
   .content {
-    gap: 24px;
+    gap: 16px;
   }
 }
 
@@ -115,7 +98,7 @@
   }
 
   .content {
-    gap: 20px;
+    gap: 14px;
   }
 }
 
@@ -134,7 +117,7 @@
   }
 
   .content {
-    gap: 16px;
+    gap: 12px;
   }
 }
 
@@ -154,10 +137,6 @@
   }
 
   .content {
-    gap: 32px;
-  }
-
-  .filtersSection {
-    width: 360px;
+    gap: 28px;
   }
 }

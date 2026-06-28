@@ -1,12 +1,13 @@
 import { Formik, Form, Field, ErrorMessage, type FormikHelpers } from 'formik';
 import Select from 'react-select';
 import * as yup from 'yup';
-import type { CreateGameIdea } from '../../types/gameIdea';
-import {
-  selectAddNewIdea,
-  useGameIdeasStore,
-} from '../../store/gameIdeasStore';
+import type { CreateGameIdea, GameIdea } from '../../types/gameIdea';
 import { GENRES } from '../../data/genres';
+import {
+  selectAddMyIdea,
+  selectUpdateMyIdea,
+  useMyIdeasStore,
+} from '../../store/myIdeasStore';
 import css from './GameIdeasForm.module.css';
 
 type GenresValues =
@@ -23,14 +24,18 @@ type GenresValues =
 interface FormValues {
   title: string;
   genre: GenresValues;
-  userName: string;
   description: string;
+}
+
+interface GameIdeasFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+  editIdea?: GameIdea | null;
 }
 
 const initialValues: FormValues = {
   title: '',
   genre: 'Action',
-  userName: '',
   description: '',
 };
 
@@ -111,8 +116,8 @@ const customSelectStyles = {
 const ideaSchema = yup.object().shape({
   title: yup
     .string()
-    .min(2, ' В назві має бути мінімум два символи')
-    .required(" Назва гри є обов'язковим полем"),
+    .min(2, 'В назві має бути мінімум два символи')
+    .required("Назва гри є обов'язковим полем"),
   genre: yup
     .string()
     .oneOf([
@@ -126,115 +131,168 @@ const ideaSchema = yup.object().shape({
       'Adventure',
       'Horror',
     ])
-    .required(" Жанр обов'язкове поле"),
-  userName: yup
-    .string()
-    .min(2, ' В вашому імені має бути мінімум два символи')
-    .required("Ваше ім'я є обов'язковим полем"),
+    .required("Жанр обов'язкове поле"),
   description: yup
     .string()
-    .max(500, ' Максимум 500 символів')
-    .min(50, ' В описі має бути мінімум 50 символів')
-    .required(" Опис є обов'язковим полем"),
+    .max(1000, 'Максимум 350 символів')
+    .min(50, 'В описі має бути мінімум 50 символів')
+    .required("Опис є обов'язковим полем"),
 });
 
-export const GameIdeasForm = () => {
-  const addNewIdea = useGameIdeasStore(selectAddNewIdea);
+export const GameIdeasForm = ({
+  isOpen,
+  onClose,
+  editIdea,
+}: GameIdeasFormProps) => {
+  const addNewIdea = useMyIdeasStore(selectAddMyIdea);
+  const updateMyIdea = useMyIdeasStore(selectUpdateMyIdea);
+  const isEditing = !!editIdea;
 
-  const handleSubmit = (
+  if (!isOpen) return null;
+
+  const handleSubmit = async (
     values: FormValues,
-    formikHelpers: FormikHelpers<FormValues>,
+    { setSubmitting, resetForm }: FormikHelpers<FormValues>,
   ) => {
-    const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0];
-    const newIdea: CreateGameIdea = {
-      title: values.title,
-      genre: values.genre,
-      userName: values.userName,
-      description: values.description,
-      votes: 0,
-      createdAt: formattedDate,
-    };
-    addNewIdea(newIdea);
-    formikHelpers.resetForm();
+    try {
+      const newIdea: CreateGameIdea = {
+        title: values.title.trim(),
+        genre: values.genre,
+        description: values.description.trim(),
+      };
+
+      if (isEditing && editIdea) {
+        await updateMyIdea(editIdea._id, values);
+      } else {
+        await addNewIdea(newIdea);
+      }
+
+      resetForm();
+      onClose();
+    } catch (error: any) {
+      console.error('❌ Ошибка сохранения идеи:', error);
+      console.error('❌ Ответ сервера:', error.response?.data);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const getInitialValues = (): FormValues => {
+    if (isEditing && editIdea) {
+      return {
+        title: editIdea.title,
+        genre: editIdea.genre as GenresValues,
+        description: editIdea.description,
+      };
+    }
+    return initialValues;
+  };
+
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={ideaSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isValid, dirty, setFieldValue, values, errors, touched }) => (
-        <Form className={css.form}>
-          <h3 className={css.formTitle}>✨ Запропонувати ідею</h3>
+    <div className={css.overlay} onClick={handleOverlayClick}>
+      <div className={css.modal}>
+        <button className={css.closeButton} onClick={onClose}>
+          ✕
+        </button>
 
-          <div className={css.formGroup}>
-            <label className={css.label}>Назва гри</label>
-            <Field
-              type="text"
-              name="title"
-              className={
-                errors.title && touched.title ? css.inputError : css.input
-              }
-            />
-            <ErrorMessage name="title" component="p" className={css.error} />
-          </div>
+        <Formik
+          initialValues={getInitialValues()}
+          validationSchema={ideaSchema}
+          onSubmit={handleSubmit}
+        >
+          {({
+            isValid,
+            dirty,
+            setFieldValue,
+            values,
+            errors,
+            touched,
+            isSubmitting,
+          }) => (
+            <Form className={css.form}>
+              <h3 className={css.formTitle}>
+                {isEditing ? '✏️ Редагувати ідею' : '✨ Запропонувати ідею'}
+              </h3>
 
-          <div className={css.formGroup}>
-            <label className={css.label}>Жанр гри</label>
-            <Select
-              instanceId="game-genre"
-              options={genreOptions}
-              value={genreOptions.find(opt => opt.value === values.genre)}
-              onChange={option => setFieldValue('genre', option?.value)}
-              styles={customSelectStyles}
-              placeholder="Оберіть жанр..."
-              isSearchable
-              className={errors.genre && touched.genre ? css.selectError : ''}
-            />
-            <ErrorMessage name="genre" component="p" className={css.error} />
-          </div>
+              <div className={css.formGroup}>
+                <label className={css.label}>Назва гри</label>
+                <Field
+                  type="text"
+                  name="title"
+                  className={
+                    errors.title && touched.title ? css.inputError : css.input
+                  }
+                  placeholder="Введіть назву гри..."
+                />
+                <ErrorMessage
+                  name="title"
+                  component="p"
+                  className={css.error}
+                />
+              </div>
 
-          <div className={css.formGroup}>
-            <label className={css.label}>Ваше ім'я</label>
-            <Field
-              type="text"
-              name="userName"
-              className={
-                errors.userName && touched.userName ? css.inputError : css.input
-              }
-            />
-            <ErrorMessage name="userName" component="p" className={css.error} />
-          </div>
+              <div className={css.formGroup}>
+                <label className={css.label}>Жанр гри</label>
+                <Select
+                  instanceId="game-genre"
+                  options={genreOptions}
+                  value={genreOptions.find(opt => opt.value === values.genre)}
+                  onChange={option => setFieldValue('genre', option?.value)}
+                  styles={customSelectStyles}
+                  placeholder="Оберіть жанр..."
+                  isSearchable
+                  className={
+                    errors.genre && touched.genre ? css.selectError : ''
+                  }
+                />
+                <ErrorMessage
+                  name="genre"
+                  component="p"
+                  className={css.error}
+                />
+              </div>
 
-          <div className={css.formGroup}>
-            <label className={css.label}>Опис ідеї</label>
-            <Field
-              as="textarea"
-              name="description"
-              className={
-                errors.description && touched.description
-                  ? css.textareaError
-                  : css.textarea
-              }
-            />
-            <ErrorMessage
-              name="description"
-              component="p"
-              className={css.error}
-            />
-          </div>
+              <div className={css.formGroup}>
+                <label className={css.label}>Опис ідеї</label>
+                <Field
+                  as="textarea"
+                  name="description"
+                  className={
+                    errors.description && touched.description
+                      ? css.textareaError
+                      : css.textarea
+                  }
+                  placeholder="Опишіть вашу ідею (мінімум 50 символів)..."
+                  rows={5}
+                />
+                <ErrorMessage
+                  name="description"
+                  component="p"
+                  className={css.error}
+                />
+              </div>
 
-          <button
-            type="submit"
-            className={css.submitButton}
-            disabled={!isValid || !dirty}
-          >
-            💡 Відправити ідею
-          </button>
-        </Form>
-      )}
-    </Formik>
+              <button
+                type="submit"
+                className={css.submitButton}
+                disabled={!isValid || !dirty || isSubmitting}
+              >
+                {isSubmitting
+                  ? 'Збереження...'
+                  : isEditing
+                    ? '💾 Зберегти зміни'
+                    : '💡 Відправити ідею'}
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </div>
+    </div>
   );
 };

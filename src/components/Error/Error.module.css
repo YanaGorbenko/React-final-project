@@ -1,4 +1,3 @@
-/* Error.module.css */
 .container {
   min-height: 400px;
   display: flex;
@@ -35,7 +34,6 @@
   line-height: 1.5;
 }
 
-/* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {
   .container {
     min-height: 380px;
@@ -64,7 +62,6 @@
   }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .container {
     min-height: 350px;
@@ -93,7 +90,6 @@
   }
 }
 
-/* Планшети малі (768px) */
 @media (max-width: 768px) {
   .container {
     min-height: 320px;
@@ -122,7 +118,6 @@
   }
 }
 
-/* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .container {
     min-height: 300px;
@@ -152,7 +147,6 @@
   }
 }
 
-/* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .container {
     min-height: 280px;
@@ -181,7 +175,6 @@
   }
 }
 
-/* Дуже маленькі телефони (до 360px) */
 @media (max-width: 360px) {
   .container {
     min-height: 250px;
@@ -210,7 +203,6 @@
   }
 }
 
-/* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
   .container {
     min-height: 500px;

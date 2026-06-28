@@ -22,7 +22,7 @@ export const NewGamesSection = () => {
           controls={true}
         >
           {newGames.map(game => (
-            <Carousel.Item key={game.id}>
+            <Carousel.Item key={game._id}>
               <div className={css.slideWrapper}>
                 <NewGameItem game={game} />
               </div>

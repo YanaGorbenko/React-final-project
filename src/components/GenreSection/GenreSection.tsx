@@ -48,7 +48,7 @@ export const GenreSection = ({ genre }: Props) => {
           ) : (
             <div className={css.gamesGrid}>
               {top3Games.map(game => (
-                <div key={game.id} className={css.gameCard}>
+                <div key={game._id} className={css.gameCard}>
                   <GameItem game={game} />
                 </div>
               ))}

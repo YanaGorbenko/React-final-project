@@ -12,7 +12,7 @@ export const GameDetailsPage = () => {
   const handleGoBack = () => {
     navigate(location.state?.from || '/games');
   };
-  const game = games.find(item => item.id === gameId);
+  const game = games.find(item => item._id === gameId);
 
   if (!game) {
     return (

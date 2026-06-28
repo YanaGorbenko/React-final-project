@@ -1,5 +1,4 @@
 import { Error } from '../../components/Error/Error';
-import { GameIdeasForm } from '../../components/GameIdeasForm/GameIdeasForm';
 import { GameIdeasList } from '../../components/GameIdeasList/GameIdeasList';
 import { Loader } from '../../components/Loader/Loader';
 import {
@@ -26,9 +25,6 @@ export const GameIdeasPage = () => {
           <div className={css.content}>
             <div className={css.listSection}>
               <GameIdeasList />
-            </div>
-            <div className={css.formSection}>
-              <GameIdeasForm />
             </div>
           </div>
         )}

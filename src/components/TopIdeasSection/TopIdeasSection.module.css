@@ -1,4 +1,3 @@
-/* TopIdeasSection.module.css */
 .section {
   padding: 60px 20px;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -33,7 +32,6 @@
 }
 
 .grid {
-  /* TopIdeasSection.module.css */
   .section {
     padding: 60px 20px;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -74,9 +72,6 @@
     gap: 24px;
   }
 
-  /* ========== АДАПТАЦІЯ ========== */
-
-  /* Ноутбуки (1024px - 1280px) */
   @media (max-width: 1280px) {
     .section {
       padding: 50px 16px;
@@ -103,7 +98,6 @@
     }
   }
 
-  /* Планшети (768px - 1024px) */
   @media (max-width: 1024px) {
     .section {
       padding: 45px 16px;
@@ -128,7 +122,6 @@
     }
   }
 
-  /* Планшети малі (768px) */
   @media (max-width: 768px) {
     .section {
       padding: 40px 12px;
@@ -156,7 +149,6 @@
     }
   }
 
-  /* Телефони (480px - 768px) */
   @media (max-width: 576px) {
     .section {
       padding: 32px 12px;
@@ -183,7 +175,6 @@
     }
   }
 
-  /* Маленькі телефони (до 480px) */
   @media (max-width: 480px) {
     .section {
       padding: 24px 12px;
@@ -208,7 +199,6 @@
     }
   }
 
-  /* Планшети в альбомній орієнтації */
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
     .grid {
       grid-template-columns: repeat(3, 1fr);
@@ -220,7 +210,6 @@
     }
   }
 
-  /* Великі десктопи (понад 1400px) */
   @media (min-width: 1400px) {
     .container {
       max-width: 1600px;
@@ -244,7 +233,6 @@
     }
   }
 
-  /* Для екранів з високою роздільною здатністю */
   @media (min-width: 1920px) {
     .container {
       max-width: 1800px;
@@ -268,7 +256,6 @@
     }
   }
 
-  /* Порожній стан */
   .emptyState {
     text-align: center;
     padding: 60px 20px;
@@ -308,7 +295,6 @@
     }
   }
 
-  /* Анімація для карток при наведенні */
   .grid > * {
     transition:
       transform 0.3s ease,
@@ -319,7 +305,6 @@
     transform: translateY(-4px);
   }
 
-  /* Для сенсорних екранів - прибираємо ефект наведення */
   @media (hover: none) {
     .grid > *:hover {
       transform: none;

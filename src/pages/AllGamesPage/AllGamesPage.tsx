@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Error } from '../../components/Error/Error';
 import { GamesFilters } from '../../components/GamesFilters/GamesFilters';
 import { GamesList } from '../../components/GamesList/GamesList';
@@ -14,6 +15,10 @@ import {
   selectSetAllSearchWord,
   selectSetAllSortByRating,
   selectSetAllSortByTitle,
+  selectFetchGamesPage,
+  selectHasMore,
+  selectLoadMoreGames,
+  selectTotalCount,
   useGamesStore,
 } from '../../store/gameStore';
 import css from './AllGamesPage.module.css';
@@ -31,6 +36,11 @@ export const AllGamesPage = () => {
   const isLoading = useGamesStore(selectIsLoading);
   const isError = useGamesStore(selectError);
 
+  const fetchGames = useGamesStore(selectFetchGamesPage);
+  const hasMore = useGamesStore(selectHasMore);
+  const loadMoreGames = useGamesStore(selectLoadMoreGames);
+  const totalCount = useGamesStore(selectTotalCount);
+
   const params = { search, sortTitle, sortRating, genres };
   const functions = {
     changeSearch,
@@ -38,6 +48,10 @@ export const AllGamesPage = () => {
     changeRatingSort,
     changeGenres,
   };
+
+  useEffect(() => {
+    fetchGames(1);
+  }, []);
 
   return (
     <div className={css.page}>
@@ -56,7 +70,14 @@ export const AllGamesPage = () => {
             </div>
 
             <div className={css.gamesSection}>
-              <GamesList games={games} />
+              <GamesList
+                games={games}
+                isLoading={isLoading}
+                hasMore={hasMore}
+                onLoadMore={loadMoreGames}
+                totalCount={totalCount}
+                currentCount={games.length}
+              />
             </div>
           </div>
         )}

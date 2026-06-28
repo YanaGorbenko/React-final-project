@@ -1,11 +1,28 @@
-export interface GameIdea {
-  id: string;
-  genre: string;
-  title: string;
-  description: string;
-  votes: number;
-  createdAt: string;
-  userName: string;
+export interface IdeaAuthor {
+  _id: string;
+  name: string;
+  email?: string;
+  photo?: string;
 }
 
-export type CreateGameIdea = Omit<GameIdea, 'id'>;
+export interface GameIdea {
+  _id: string;
+  title: string;
+  genre: string;
+  description: string;
+  votes: number;
+  voters: string[];
+  authorId: IdeaAuthor | string;
+}
+
+export type CreateGameIdea = {
+  title: string;
+  genre: string;
+  description: string;
+};
+
+export type UpdateGameIdea = {
+  title?: string;
+  genre?: string;
+  description?: string;
+};

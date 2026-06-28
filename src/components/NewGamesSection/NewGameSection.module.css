@@ -1,4 +1,3 @@
-/* NewGamesSection.module.css */
 .section {
   padding: 60px 20px;
   background: #0a0a0a;
@@ -25,13 +24,11 @@
   margin-bottom: 40px;
 }
 
-/* Головне - розтягуємо карусель на всю ширину */
 .carousel {
   width: 100%;
   margin: 0 auto;
 }
 
-/* Робимо карусель ширшою */
 .carousel :global(.carousel-inner) {
   width: 100%;
 }
@@ -40,13 +37,11 @@
   width: 100%;
 }
 
-/* Розтягуємо картку на всю ширину */
 .carousel :global(.carousel-item.active) {
   display: flex;
   justify-content: center;
 }
 
-/* Стилі для стрілок */
 .carousel :global(.carousel-control-prev),
 .carousel :global(.carousel-control-next) {
   width: 8%;
@@ -73,9 +68,6 @@
   margin: 0 5px !important;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
-
-/* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {
   .section {
     padding: 50px 16px;
@@ -102,7 +94,6 @@
   }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .section {
     padding: 40px 16px;
@@ -129,7 +120,6 @@
   }
 }
 
-/* Планшети малі (768px) */
 @media (max-width: 768px) {
   .section {
     padding: 40px 12px;
@@ -166,7 +156,6 @@
   }
 }
 
-/* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .section {
     padding: 32px 12px;
@@ -203,7 +192,6 @@
   }
 }
 
-/* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .section {
     padding: 24px 10px;
@@ -241,7 +229,6 @@
   }
 }
 
-/* Планшети в альбомній орієнтації */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .section {
     padding: 45px 20px;
@@ -253,7 +240,6 @@
   }
 }
 
-/* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
   .container {
     max-width: 1600px;
@@ -275,7 +261,6 @@
   }
 }
 
-/* Для екранів з високою роздільною здатністю */
 @media (min-width: 1920px) {
   .container {
     max-width: 1800px;
@@ -291,7 +276,6 @@
   }
 }
 
-/* Приховуємо стрілки на дуже маленьких екранах (опціонально) */
 @media (max-width: 480px) {
   .carousel :global(.carousel-control-prev),
   .carousel :global(.carousel-control-next) {
@@ -299,7 +283,6 @@
   }
 }
 
-/* Стилі для свайпу на мобільних (дотики) */
 @media (max-width: 768px) {
   .carousel {
     touch-action: pan-y pinch-zoom;

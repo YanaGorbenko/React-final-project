@@ -10,6 +10,7 @@ export const Loader = ({ isLoading }: Props) => {
   return (
     <div className={css.overlay}>
       <div className={css.spinner}></div>
+      <p className={css.text}>Завантаження...</p>
     </div>
   );
 };

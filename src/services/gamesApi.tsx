@@ -1,56 +1,83 @@
-import axios from 'axios';
+import { api } from './api';
 import { type Game } from '../types/game';
+import type { Genre } from '../types/genre';
 
-axios.defaults.baseURL = 'https://69e4843acfa9394db8da25af.mockapi.io/api';
+interface GamesResponse {
+  games: Game[];
+  totalCount: number;
+  totalPages: number;
+}
+
 interface Props {
   searchWord?: string;
   sortByTitle?: 'not' | 'asc' | 'desc';
   sortByRating?: 'not' | 'asc' | 'desc';
+  genres?: Genre['name'][];
+  page?: number;
+  limit?: number;
 }
 
-export const getGames = async ({
-  searchWord,
-  sortByTitle,
-  sortByRating,
-}: Props): Promise<Game[]> => {
-  const url = new URL('/games', axios.defaults.baseURL);
-  if (searchWord && searchWord.trim()) {
-    url.searchParams.append('search', searchWord.trim());
-  }
-
-  if (sortByTitle === 'asc') {
-    url.searchParams.append('sortBy', 'title');
-    url.searchParams.append('order', 'asc');
-  } else if (sortByTitle === 'desc') {
-    url.searchParams.append('sortBy', 'title');
-    url.searchParams.append('order', 'desc');
-  }
-
-  if (sortByRating === 'asc') {
-    url.searchParams.append('sortBy', 'rating');
-    url.searchParams.append('order', 'asc');
-  } else if (sortByRating === 'desc') {
-    url.searchParams.append('sortBy', 'rating');
-    url.searchParams.append('order', 'desc');
-  }
+export const getAllGames = async (): Promise<Game[]> => {
   try {
-    const response = await axios.get<Game[]>(url.toString(), {
-      headers: { 'content-type': 'application/json' },
-    });
+    const params = new URLSearchParams();
+    params.append('limit', '1000');
 
-    return response.data;
+    const response = await api.get<GamesResponse>(
+      `/games?${params.toString()}`,
+    );
+
+    return response.data.games;
   } catch (error) {
-    console.error('API Error:', error);
-
+    console.error('❌ Ошибка получения всех игр:', error);
     return [];
   }
 };
 
-export const changeIsFavorite = async (
-  game: Game,
-  isFavorite: boolean,
-): Promise<Game> => {
-  const updatedGame = { ...game, isFavorite };
-  const { data } = await axios.put(`/games/${game.id}`, updatedGame);
-  return data;
+export const getGamesWithPagination = async ({
+  searchWord,
+  sortByTitle,
+  sortByRating,
+  genres,
+  page = 1,
+  limit = 20,
+}: Props): Promise<GamesResponse> => {
+  try {
+    const params = new URLSearchParams();
+
+    params.append('page', String(page));
+    params.append('limit', String(limit));
+
+    if (searchWord?.trim()) {
+      params.append('search', searchWord.trim());
+    }
+
+    if (genres?.length) {
+      params.append('genres', genres.join(','));
+    }
+
+    if (sortByTitle === 'asc') {
+      params.append('sortBy', 'title');
+      params.append('sortOrder', 'asc');
+    } else if (sortByTitle === 'desc') {
+      params.append('sortBy', 'title');
+      params.append('sortOrder', 'desc');
+    }
+
+    if (sortByRating === 'asc') {
+      params.append('sortBy', 'rating');
+      params.append('sortOrder', 'asc');
+    } else if (sortByRating === 'desc') {
+      params.append('sortBy', 'rating');
+      params.append('sortOrder', 'desc');
+    }
+
+    const response = await api.get<GamesResponse>(
+      `/games?${params.toString()}`,
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('❌ Ошибка получения игр с пагинацией:', error);
+    return { games: [], totalCount: 0, totalPages: 0 };
+  }
 };

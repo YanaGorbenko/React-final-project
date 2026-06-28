@@ -20,9 +20,13 @@ export const TopIdeaItem = ({ idea, rank }: Props) => {
     }
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('uk-UA');
+  const getAuthorName = (author: any): string => {
+    if (!author) return 'Невідомий автор';
+    if (typeof author === 'object') return author.name || 'Невідомий автор';
+    return String(author);
   };
+
+  const authorName = getAuthorName(idea.authorId);
 
   return (
     <div className={css.card}>
@@ -34,22 +38,21 @@ export const TopIdeaItem = ({ idea, rank }: Props) => {
       <h3 className={css.title}>{idea.title}</h3>
 
       <div className={css.meta}>
-        <span className={css.genre}>{idea.genre}</span>
-        <span className={css.author}>👤 {idea.userName}</span>
+        <span className={css.genre}>🎮 {idea.genre}</span>
+        <span className={css.author}>👤 {authorName}</span>
       </div>
 
       <p className={css.description}>
-        {idea.description.length > 120
-          ? idea.description.substring(0, 300) + '...'
-          : idea.description}
+        {idea.description && idea.description.length > 120
+          ? idea.description.substring(0, 120) + '...'
+          : idea.description || 'Опис відсутній'}
       </p>
 
       <div className={css.footer}>
         <div className={css.votes}>
           <span className={css.votesIcon}>👍</span>
-          <span className={css.votesCount}>{idea.votes} голосів</span>
+          <span className={css.votesCount}>{idea.votes || 0} голосів</span>
         </div>
-        <div className={css.date}>📅 {formatDate(idea.createdAt)}</div>
       </div>
     </div>
   );

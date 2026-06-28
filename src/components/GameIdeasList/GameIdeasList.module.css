@@ -1,4 +1,3 @@
-/* GameIdeasList.module.css */
 .container {
   width: 100%;
 }
@@ -53,16 +52,94 @@
   gap: 20px;
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 24px 0;
 }
 
 .listItem {
   margin: 0;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+}
 
-/* Ноутбуки (1024px - 1280px) */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #2a2a2a;
+  border-top: 4px solid #e63946;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadMoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  margin-top: 8px;
+}
+
+.loadMoreButton {
+  padding: 12px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #e63946 0%, #c62828 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+}
+
+.loadMoreButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
+}
+
+.loadMoreButton:active {
+  transform: translateY(0);
+}
+
+.loadMoreButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loadMoreInfo {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.allLoaded {
+  text-align: center;
+  padding: 20px 0;
+  color: #4caf50;
+}
+
+.allLoaded p {
+  font-size: 16px;
+  margin: 0;
+}
+
 @media (max-width: 1280px) {
   .header {
     margin-bottom: 20px;
@@ -88,9 +165,13 @@
   .emptyTitle {
     font-size: 1.35rem;
   }
+
+  .loadMoreButton {
+    padding: 10px 34px;
+    font-size: 15px;
+  }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .header {
     margin-bottom: 18px;
@@ -120,9 +201,18 @@
   .emptyText {
     font-size: 0.9rem;
   }
+
+  .loadMoreButton {
+    padding: 10px 30px;
+    font-size: 14px;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+  }
 }
 
-/* Планшети малі (768px) */
 @media (max-width: 768px) {
   .header {
     flex-direction: column;
@@ -155,9 +245,28 @@
   .emptyText {
     font-size: 0.85rem;
   }
+
+  .loadMoreContainer {
+    padding: 16px 0;
+  }
+
+  .loadMoreButton {
+    padding: 10px 28px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .loadMoreInfo {
+    font-size: 13px;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+  }
 }
 
-/* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .header {
     margin-bottom: 14px;
@@ -189,9 +298,37 @@
   .emptyText {
     font-size: 0.8rem;
   }
+
+  .loadMoreContainer {
+    padding: 14px 0;
+    gap: 10px;
+  }
+
+  .loadMoreButton {
+    padding: 10px 24px;
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .loadMoreInfo {
+    font-size: 12px;
+  }
+
+  .loadingState {
+    padding: 30px 16px;
+  }
+
+  .spinner {
+    width: 28px;
+    height: 28px;
+    border-width: 3px;
+  }
+
+  .allLoaded p {
+    font-size: 14px;
+  }
 }
 
-/* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .header {
     margin-bottom: 12px;
@@ -226,9 +363,37 @@
   .emptyText {
     font-size: 0.75rem;
   }
+
+  .loadMoreContainer {
+    padding: 12px 0;
+    gap: 8px;
+  }
+
+  .loadMoreButton {
+    padding: 8px 20px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .loadMoreInfo {
+    font-size: 11px;
+  }
+
+  .loadingState {
+    padding: 24px 12px;
+  }
+
+  .spinner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+  }
+
+  .allLoaded p {
+    font-size: 13px;
+  }
 }
 
-/* Дуже маленькі телефони (до 360px) */
 @media (max-width: 360px) {
   .listTitle {
     font-size: 0.9rem;
@@ -249,9 +414,26 @@
   .emptyText {
     font-size: 0.7rem;
   }
+
+  .loadMoreButton {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+
+  .loadMoreInfo {
+    font-size: 10px;
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+  }
+
+  .allLoaded p {
+    font-size: 12px;
+  }
 }
 
-/* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
   .header {
     margin-bottom: 28px;
@@ -287,9 +469,33 @@
   .emptyText {
     font-size: 1rem;
   }
+
+  .loadMoreContainer {
+    padding: 24px 0;
+    gap: 16px;
+  }
+
+  .loadMoreButton {
+    padding: 14px 48px;
+    font-size: 18px;
+    border-radius: 10px;
+  }
+
+  .loadMoreInfo {
+    font-size: 16px;
+  }
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border-width: 5px;
+  }
+
+  .allLoaded p {
+    font-size: 18px;
+  }
 }
 
-/* Для екранів з високою роздільною здатністю */
 @media (min-width: 1920px) {
   .listTitle {
     font-size: 2rem;
@@ -309,5 +515,17 @@
 
   .emptyTitle {
     font-size: 2rem;
+  }
+
+  .loadMoreButton {
+    padding: 16px 56px;
+    font-size: 20px;
+  }
+}
+
+@media (hover: none) {
+  .loadMoreButton:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
   }
 }

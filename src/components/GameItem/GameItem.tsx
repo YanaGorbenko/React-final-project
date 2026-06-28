@@ -1,7 +1,14 @@
-import { selectToggleFavorite, useGamesStore } from '../../store/gameStore';
+import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import {
+  useSelectedStore,
+  selectToggleSelected,
+  selectSelectedIds,
+} from '../../store/selectedStore';
+import { useAuthStore, selectIsAuth } from '../../store/authStore';
 import type { Game } from '../../types/game';
 import css from './GameItem.module.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+
 interface Props {
   game: Game;
 }
@@ -9,7 +16,25 @@ interface Props {
 export const GameItem = ({ game }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const toggleFavorite = useGamesStore(selectToggleFavorite);
+  const toggleSelected = useSelectedStore(selectToggleSelected);
+  const selectedIds = useSelectedStore(selectSelectedIds);
+  const isAuth = useAuthStore(selectIsAuth);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isFavorite = selectedIds.includes(game._id);
+
+  const handleToggleFavorite = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!isAuth) {
+      alert('Будь ласка, увійдіть, щоб додати гру в обране');
+      return;
+    }
+
+    setIsLoading(true);
+    await toggleSelected(game._id);
+    setIsLoading(false);
+  };
 
   return (
     <div className={css.card}>
@@ -25,19 +50,26 @@ export const GameItem = ({ game }: Props) => {
           <span className={css.ratingValue}>⭐ {game.rating}/10</span>
         </div>
 
-        <div className={css.favorite}>
-          <button
-            className={`${css.favoriteBtn} ${game.isFavorite ? css.favoriteTrue : css.favoriteFalse}`}
-            onClick={() => toggleFavorite(game.id)}
-          >
-            {game.isFavorite ? '❤️ Прибрати з обраного' : '♡ Додати в обране'}
-          </button>
-        </div>
+        {isAuth && (
+          <div className={css.favorite}>
+            <button
+              className={`${css.favoriteBtn} ${isFavorite ? css.favoriteTrue : css.favoriteFalse}`}
+              onClick={handleToggleFavorite}
+              disabled={isLoading}
+            >
+              {isLoading
+                ? '⏳'
+                : isFavorite
+                  ? '❤️ Прибрати з обраного'
+                  : '♡ Додати в обране'}
+            </button>
+          </div>
+        )}
 
         <button
           className={css.button}
           onClick={() =>
-            navigate(`/${game.id}/details`, {
+            navigate(`/${game._id}/details`, {
               state: { from: location.pathname },
             })
           }

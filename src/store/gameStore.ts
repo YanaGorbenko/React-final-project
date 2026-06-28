@@ -1,74 +1,70 @@
 import { create } from 'zustand';
 import { type Game } from '../types/game';
-import { changeIsFavorite, getGames } from '../services/gamesApi';
+import { getAllGames, getGamesWithPagination } from '../services/gamesApi';
 
 interface GamesStore {
   games: Game[];
+  filteredGames: Game[];
   isLoading: boolean;
   error: string | null;
 
-  allFilters: {
+  Filters: {
     searchWord: string;
     sortByTitle: 'not' | 'asc' | 'desc';
     sortByRating: 'not' | 'asc' | 'desc';
     genresFilter: string[];
   };
 
-  selectedFilters: {
-    searchWord: string;
-    sortByTitle: 'not' | 'asc' | 'desc';
-    sortByRating: 'not' | 'asc' | 'desc';
-    genresFilter: string[];
-  };
-
-  filteredAllGames: Game[];
-  filteredSelectedGames: Game[];
   top8RatedGames: Game[];
   newGames: Game[];
   top3GamesByGenre: { [genre: string]: Game[] };
 
-  setAllSearchWord: (word: string) => void;
-  setAllSortByTitle: (sort: 'asc' | 'desc' | 'not') => void;
-  setAllSortByRating: (sort: 'asc' | 'desc' | 'not') => void;
-  setAllGenresFilter: (genres: string[]) => void;
-  applyAllFilters: () => void;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalCount: number;
+    hasMore: boolean;
+    limit: number;
+  };
 
-  setSelectedSearchWord: (word: string) => void;
-  setSelectedSortByTitle: (sort: 'asc' | 'desc' | 'not') => void;
-  setSelectedSortByRating: (sort: 'asc' | 'desc' | 'not') => void;
-  setSelectedGenresFilter: (genres: string[]) => void;
-  applySelectedFilters: () => void;
+  fetchAllGames: () => Promise<void>;
+  fetchGamesPage: (page: number) => Promise<void>;
+  loadMoreGames: () => Promise<void>;
+  resetGames: () => void;
 
-  fetchGames: () => Promise<void>;
-  toggleFavorite: (gameId: string) => Promise<void>;
+  setSearchWord: (word: string) => void;
+  setSortByTitle: (sort: 'asc' | 'desc' | 'not') => void;
+  setSortByRating: (sort: 'asc' | 'desc' | 'not') => void;
+  setGenresFilter: (genres: string[]) => void;
+
   getTopRatedGame: () => Game | undefined;
   updateTop3GamesByGenre: () => void;
 }
 
 export const useGamesStore = create<GamesStore>((set, get) => ({
   games: [],
+  filteredGames: [],
   isLoading: false,
   error: null,
 
-  allFilters: {
+  Filters: {
     searchWord: '',
     sortByTitle: 'not',
     sortByRating: 'not',
     genresFilter: [],
   },
 
-  selectedFilters: {
-    searchWord: '',
-    sortByTitle: 'not',
-    sortByRating: 'not',
-    genresFilter: [],
-  },
-
-  filteredAllGames: [],
-  filteredSelectedGames: [],
   top8RatedGames: [],
   newGames: [],
   top3GamesByGenre: {},
+
+  pagination: {
+    currentPage: 1,
+    totalPages: 1,
+    totalCount: 0,
+    hasMore: true,
+    limit: 20,
+  },
 
   updateTop3GamesByGenre: () => {
     const { games } = get();
@@ -88,7 +84,7 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
 
     genres.forEach(genre => {
       const genreGames = games
-        .filter(game => game.genre.toLowerCase() === genre.toLowerCase())
+        .filter(game => game.genre?.toLowerCase() === genre.toLowerCase())
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 3);
       top3ByGenre[genre] = genreGames;
@@ -97,15 +93,16 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     set({ top3GamesByGenre: top3ByGenre });
   },
 
-  fetchGames: async () => {
+  fetchAllGames: async () => {
     set({ isLoading: true, error: null });
     try {
-      const games = await getGames({});
+      const allGames = await getAllGames();
 
-      const topGames = [...games]
+      const top8RatedGames = [...allGames]
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 8);
-      const newestGames = [...games]
+
+      const newGames = [...allGames]
         .sort(
           (a, b) =>
             new Date(b.releaseDate).getTime() -
@@ -113,13 +110,22 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
         )
         .slice(0, 5);
 
+      const limit = 20;
+      const firstBatch = allGames.slice(0, limit);
+
       set({
-        games,
+        games: allGames,
+        filteredGames: firstBatch,
         isLoading: false,
-        top8RatedGames: topGames,
-        newGames: newestGames,
-        filteredAllGames: games,
-        filteredSelectedGames: games.filter(g => g.isFavorite),
+        top8RatedGames,
+        newGames,
+        pagination: {
+          currentPage: 1,
+          totalPages: Math.ceil(allGames.length / limit),
+          totalCount: allGames.length,
+          hasMore: allGames.length > limit,
+          limit: limit,
+        },
       });
 
       get().updateTop3GamesByGenre();
@@ -131,160 +137,131 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
     }
   },
 
-  setAllSearchWord: word => {
-    set({ allFilters: { ...get().allFilters, searchWord: word } });
-    get().applyAllFilters();
-  },
-
-  setAllSortByTitle: sort => {
-    set({
-      allFilters: {
-        ...get().allFilters,
-        sortByTitle: sort,
-        sortByRating: 'not',
-      },
-    });
-    get().applyAllFilters();
-  },
-
-  setAllSortByRating: sort => {
-    set({
-      allFilters: {
-        ...get().allFilters,
-        sortByRating: sort,
-        sortByTitle: 'not',
-      },
-    });
-    get().applyAllFilters();
-  },
-
-  setAllGenresFilter: genres => {
-    set({ allFilters: { ...get().allFilters, genresFilter: genres } });
-    get().applyAllFilters();
-  },
-
-  applyAllFilters: async () => {
+  fetchGamesPage: async (page: number) => {
     set({ isLoading: true, error: null });
     try {
-      const { allFilters } = get();
+      const { Filters, pagination } = get();
 
-      let filtered = await getGames({
-        searchWord: allFilters.searchWord,
-        sortByTitle: allFilters.sortByTitle,
-        sortByRating: allFilters.sortByRating,
+      const response = await getGamesWithPagination({
+        searchWord: Filters.searchWord,
+        sortByTitle: Filters.sortByTitle,
+        sortByRating: Filters.sortByRating,
+        genres: Filters.genresFilter,
+        page: page,
+        limit: pagination.limit,
       });
 
-      if (allFilters.genresFilter.length > 0) {
-        filtered = filtered.filter(game =>
-          allFilters.genresFilter.includes(game.genre),
-        );
-      }
-
-      set({ filteredAllGames: filtered, isLoading: false });
-    } catch (error) {
-      console.error('Apply filters error:', error);
       set({
-        filteredAllGames: [],
+        filteredGames: response.games,
+        pagination: {
+          currentPage: page,
+          totalPages: response.totalPages,
+          totalCount: response.totalCount,
+          hasMore: page < response.totalPages,
+          limit: pagination.limit,
+        },
         isLoading: false,
-        error: null,
+      });
+    } catch (error) {
+      set({
+        error:
+          error instanceof Error ? error.message : 'Failed to fetch games page',
+        isLoading: false,
       });
     }
   },
 
-  setSelectedSearchWord: word => {
-    set({ selectedFilters: { ...get().selectedFilters, searchWord: word } });
-    get().applySelectedFilters();
-  },
+  loadMoreGames: async () => {
+    const { filteredGames, pagination, Filters } = get();
 
-  setSelectedSortByTitle: sort => {
-    set({
-      selectedFilters: {
-        ...get().selectedFilters,
-        sortByTitle: sort,
-        sortByRating: 'not',
-      },
-    });
-    get().applySelectedFilters();
-  },
+    if (!pagination.hasMore) {
+      return;
+    }
 
-  setSelectedSortByRating: sort => {
-    set({
-      selectedFilters: {
-        ...get().selectedFilters,
-        sortByRating: sort,
-        sortByTitle: 'not',
-      },
-    });
-    get().applySelectedFilters();
-  },
-
-  setSelectedGenresFilter: genres => {
-    set({
-      selectedFilters: { ...get().selectedFilters, genresFilter: genres },
-    });
-    get().applySelectedFilters();
-  },
-
-  applySelectedFilters: async () => {
     set({ isLoading: true, error: null });
     try {
-      const { selectedFilters } = get();
+      const nextPage = pagination.currentPage + 1;
+      const limit = pagination.limit;
 
-      let allFiltered = await getGames({
-        searchWord: selectedFilters.searchWord,
-        sortByTitle: selectedFilters.sortByTitle,
-        sortByRating: selectedFilters.sortByRating,
+      const response = await getGamesWithPagination({
+        searchWord: Filters.searchWord,
+        sortByTitle: Filters.sortByTitle,
+        sortByRating: Filters.sortByRating,
+        genres: Filters.genresFilter,
+        page: nextPage,
+        limit: limit,
       });
 
-      let filtered = allFiltered.filter(game => game.isFavorite);
+      const allFilteredGames = [...filteredGames, ...response.games];
 
-      if (selectedFilters.genresFilter.length > 0) {
-        filtered = filtered.filter(game =>
-          selectedFilters.genresFilter.includes(game.genre),
-        );
-      }
-
-      set({ filteredSelectedGames: filtered, isLoading: false });
-    } catch (error) {
-      console.error('Apply selected filters error:', error);
-      set({
-        filteredSelectedGames: [],
-        isLoading: false,
-        error: null,
-      });
-    }
-  },
-
-  toggleFavorite: async (gameId: string) => {
-    try {
       const { games } = get();
-      const game = games.find(g => g.id === gameId);
-      if (!game) return;
-      const updatedGame = await changeIsFavorite(game, !game.isFavorite);
-      const updatedGames = games.map(g => (g.id === gameId ? updatedGame : g));
-      const topGames = [...updatedGames]
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 8);
-      const newestGames = [...updatedGames]
-        .sort(
-          (a, b) =>
-            new Date(b.releaseDate).getTime() -
-            new Date(a.releaseDate).getTime(),
-        )
-        .slice(0, 5);
+      const hasMore = allFilteredGames.length < games.length;
 
       set({
-        games: updatedGames,
-        top8RatedGames: topGames,
-        newGames: newestGames,
+        filteredGames: allFilteredGames,
+        pagination: {
+          currentPage: nextPage,
+          totalPages: response.totalPages,
+          totalCount: response.totalCount,
+          hasMore: hasMore,
+          limit: limit,
+        },
+        isLoading: false,
       });
-
-      get().updateTop3GamesByGenre();
-      get().applyAllFilters();
-      get().applySelectedFilters();
     } catch (error) {
-      console.error('Failed to toggle favorite:', error);
+      set({
+        error:
+          error instanceof Error ? error.message : 'Failed to load more games',
+        isLoading: false,
+      });
     }
+  },
+
+  resetGames: () => {
+    set({
+      games: [],
+      filteredGames: [],
+      pagination: {
+        currentPage: 1,
+        totalPages: 1,
+        totalCount: 0,
+        hasMore: true,
+        limit: 20,
+      },
+    });
+    get().fetchAllGames();
+  },
+
+  setSearchWord: word => {
+    set({ Filters: { ...get().Filters, searchWord: word } });
+    get().fetchGamesPage(1);
+  },
+
+  setSortByTitle: sort => {
+    set({
+      Filters: {
+        ...get().Filters,
+        sortByTitle: sort,
+        sortByRating: 'not',
+      },
+    });
+    get().fetchGamesPage(1);
+  },
+
+  setSortByRating: sort => {
+    set({
+      Filters: {
+        ...get().Filters,
+        sortByRating: sort,
+        sortByTitle: 'not',
+      },
+    });
+    get().fetchGamesPage(1);
+  },
+
+  setGenresFilter: genres => {
+    set({ Filters: { ...get().Filters, genresFilter: genres } });
+    get().fetchGamesPage(1);
   },
 
   getTopRatedGame: () => {
@@ -296,56 +273,48 @@ export const useGamesStore = create<GamesStore>((set, get) => ({
   },
 }));
 
-export const selectFilteredAllGames = (state: GamesStore) =>
-  state.filteredAllGames;
-export const selectAllSearchWord = (state: GamesStore) =>
-  state.allFilters.searchWord;
-export const selectAllSortByTitle = (state: GamesStore) =>
-  state.allFilters.sortByTitle;
-export const selectAllSortByRating = (state: GamesStore) =>
-  state.allFilters.sortByRating;
-export const selectAllGenresFilter = (state: GamesStore) =>
-  state.allFilters.genresFilter;
-
-export const selectSetAllSearchWord = (state: GamesStore) =>
-  state.setAllSearchWord;
-export const selectSetAllSortByTitle = (state: GamesStore) =>
-  state.setAllSortByTitle;
-export const selectSetAllSortByRating = (state: GamesStore) =>
-  state.setAllSortByRating;
-export const selectSetAllGenresFilter = (state: GamesStore) =>
-  state.setAllGenresFilter;
-
-export const selectFilteredSelectedGames = (state: GamesStore) =>
-  state.filteredSelectedGames;
-export const selectSelectedSearchWord = (state: GamesStore) =>
-  state.selectedFilters.searchWord;
-export const selectSelectedSortByTitle = (state: GamesStore) =>
-  state.selectedFilters.sortByTitle;
-export const selectSelectedSortByRating = (state: GamesStore) =>
-  state.selectedFilters.sortByRating;
-export const selectSelectedGenresFilter = (state: GamesStore) =>
-  state.selectedFilters.genresFilter;
-
-export const selectSetSelectedSearchWord = (state: GamesStore) =>
-  state.setSelectedSearchWord;
-export const selectSetSelectedSortByTitle = (state: GamesStore) =>
-  state.setSelectedSortByTitle;
-export const selectSetSelectedSortByRating = (state: GamesStore) =>
-  state.setSelectedSortByRating;
-export const selectSetSelectedGenresFilter = (state: GamesStore) =>
-  state.setSelectedGenresFilter;
-
+export const selectGames = (state: GamesStore) => state.games;
 export const selectAllGames = (state: GamesStore) => state.games;
-export const selectIsLoading = (state: GamesStore) => state.isLoading;
-export const selectError = (state: GamesStore) => state.error;
-export const selectFetchGames = (state: GamesStore) => state.fetchGames;
+export const selectFetchAllGames = (state: GamesStore) => state.fetchAllGames;
 
-export const selectGetTopRatedGame = (state: GamesStore) =>
-  state.getTopRatedGame;
+export const selectFilteredGames = (state: GamesStore) => state.filteredGames;
+export const selectFilteredAllGames = (state: GamesStore) =>
+  state.filteredGames;
+export const selectFetchGamesPage = (state: GamesStore) => state.fetchGamesPage;
+export const selectLoadMoreGames = (state: GamesStore) => state.loadMoreGames;
+export const selectPagination = (state: GamesStore) => state.pagination;
+export const selectHasMore = (state: GamesStore) => state.pagination.hasMore;
+export const selectTotalCount = (state: GamesStore) =>
+  state.pagination.totalCount;
+export const selectCurrentPage = (state: GamesStore) =>
+  state.pagination.currentPage;
+
 export const selectTopEightRatedGames = (state: GamesStore) =>
   state.top8RatedGames;
 export const selectFiveNewestGames = (state: GamesStore) => state.newGames;
-export const selectToggleFavorite = (state: GamesStore) => state.toggleFavorite;
 export const selectTop3GamesByGenre = (state: GamesStore) =>
   state.top3GamesByGenre;
+export const selectGetTopRatedGame = (state: GamesStore) =>
+  state.getTopRatedGame;
+
+export const selectIsLoading = (state: GamesStore) => state.isLoading;
+export const selectError = (state: GamesStore) => state.error;
+export const selectResetGames = (state: GamesStore) => state.resetGames;
+
+export const selectAllSearchWord = (state: GamesStore) =>
+  state.Filters.searchWord;
+export const selectAllSortByTitle = (state: GamesStore) =>
+  state.Filters.sortByTitle;
+export const selectAllSortByRating = (state: GamesStore) =>
+  state.Filters.sortByRating;
+export const selectAllGenresFilter = (state: GamesStore) =>
+  state.Filters.genresFilter;
+
+export const selectSetAllSearchWord = (state: GamesStore) =>
+  state.setSearchWord;
+export const selectSetAllSortByTitle = (state: GamesStore) =>
+  state.setSortByTitle;
+export const selectSetAllSortByRating = (state: GamesStore) =>
+  state.setSortByRating;
+export const selectSetAllGenresFilter = (state: GamesStore) =>
+  state.setGenresFilter;

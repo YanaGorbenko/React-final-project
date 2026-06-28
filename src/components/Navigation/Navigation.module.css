@@ -1,8 +1,10 @@
-/* Navigation.module.css */
 .nav {
   max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navList {
@@ -31,20 +33,110 @@
   color: #e63946;
 }
 
-/* Активне посилання */
 .active {
   color: #e63946;
   border-bottom: 2px solid #e63946;
 }
 
-/* Якщо хочете різні кольори для різних станів */
 .navLink:active {
   color: #c1121f;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
+.authSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-/* Ноутбуки (1024px - 1280px) */
+.authButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.loginButton,
+.registerButton {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginButton {
+  background: transparent;
+  color: #9ca3af;
+  border: 1.5px solid #333;
+}
+
+.loginButton:hover {
+  color: #ffffff;
+  border-color: #e63946;
+  background: rgba(230, 57, 70, 0.05);
+}
+
+.registerButton {
+  background: linear-gradient(135deg, #e63946 0%, #c62828 100%);
+  color: #ffffff;
+}
+
+.registerButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e63946;
+}
+
+.userName {
+  color: #e5e7eb;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.logoutButton {
+  background: transparent;
+  border: 1px solid #333;
+  color: #9ca3af;
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+  color: #e63946;
+  border-color: #e63946;
+  background: rgba(230, 57, 70, 0.05);
+}
+
+.profileLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e63946;
+}
+
 @media (max-width: 1280px) {
   .nav {
     max-width: 1100px;
@@ -60,7 +152,6 @@
   }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .nav {
     max-width: 960px;
@@ -74,12 +165,19 @@
   .navLink {
     font-size: 0.9rem;
   }
+
+  .loginButton,
+  .registerButton {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
 }
 
-/* Планшети малі (768px) */
 @media (max-width: 768px) {
   .nav {
     padding: 0.7rem 1rem;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .navList {
@@ -95,12 +193,32 @@
   .active {
     border-bottom-width: 1.5px;
   }
+
+  .authSection {
+    gap: 8px;
+  }
+
+  .loginButton,
+  .registerButton {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+
+  .userName {
+    font-size: 0.8rem;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
 }
 
-/* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .nav {
     padding: 0.6rem 0.8rem;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .navList {
@@ -109,20 +227,32 @@
     justify-content: center;
   }
 
-  .navItem {
-    margin: 0;
-  }
-
   .navLink {
     font-size: 0.8rem;
     padding: 0.3rem 0;
   }
+
+  .authSection {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .loginButton,
+  .registerButton {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .userMenu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
-/* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .nav {
     padding: 0.5rem 0.5rem;
+    gap: 6px;
   }
 
   .navList {
@@ -137,40 +267,35 @@
   .active {
     border-bottom-width: 1px;
   }
+
+  .loginButton,
+  .registerButton {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+
+  .userName {
+    font-size: 0.7rem;
+  }
+
+  .avatar {
+    width: 24px;
+    height: 24px;
+    border-width: 1.5px;
+  }
+
+  .logoutButton {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+  }
 }
 
-/* Мобільне меню (бургер) для дуже маленьких екранів (опціонально) */
 @media (max-width: 400px) {
   .nav {
     position: relative;
   }
-
-  /* Якщо потрібно бургер-меню, розкоментуйте */
-  /* .navList {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #1a1a1a;
-    padding: 1rem;
-    gap: 0.8rem;
-    z-index: 100;
-  }
-  
-  .navList.open {
-    display: flex;
-  }
-  
-  .navLink {
-    display: block;
-    text-align: center;
-    padding: 0.5rem;
-  } */
 }
 
-/* Горизонтальна орієнтація на телефонах */
 @media (max-width: 896px) and (orientation: landscape) {
   .nav {
     padding: 0.5rem 1rem;
@@ -190,6 +315,11 @@
   .navLink {
     padding: 0.6rem 0;
   }
+
+  .loginButton:hover,
+  .registerButton:hover {
+    transform: none;
+  }
 }
 
 @media (min-width: 1400px) {
@@ -204,6 +334,21 @@
 
   .navLink {
     font-size: 1.1rem;
+  }
+
+  .loginButton,
+  .registerButton {
+    padding: 10px 24px;
+    font-size: 1rem;
+  }
+
+  .avatar {
+    width: 42px;
+    height: 42px;
+  }
+
+  .userName {
+    font-size: 1rem;
   }
 }
 

@@ -1,4 +1,10 @@
-import { selectToggleFavorite, useGamesStore } from '../../store/gameStore';
+import { useState } from 'react';
+import { selectIsAuth, useAuthStore } from '../../store/authStore';
+import {
+  selectToggleSelected,
+  selectSelectedIds,
+  useSelectedStore,
+} from '../../store/selectedStore';
 import type { Game } from '../../types/game';
 import css from './GameDetails.module.css';
 
@@ -7,7 +13,12 @@ interface Props {
 }
 
 export const GameDetails = ({ game }: Props) => {
-  const toggleFavorite = useGamesStore(selectToggleFavorite);
+  const toggleSelected = useSelectedStore(selectToggleSelected);
+  const selectedIds = useSelectedStore(selectSelectedIds);
+  const isAuth = useAuthStore(selectIsAuth);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const isFavorite = selectedIds.includes(game._id);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('uk-UA', {
@@ -16,6 +27,20 @@ export const GameDetails = ({ game }: Props) => {
       day: 'numeric',
     });
   };
+
+  const handleToggleFavorite = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!isAuth) {
+      alert('Будь ласка, увійдіть, щоб додати гру в обране');
+      return;
+    }
+
+    setIsLoading(true);
+    await toggleSelected(game._id);
+    setIsLoading(false);
+  };
+
   return (
     <div className={css.card}>
       <div className={css.content}>
@@ -49,14 +74,27 @@ export const GameDetails = ({ game }: Props) => {
             <p className={css.descriptionText}>{game.description}</p>
           </div>
 
-          <div className={css.favoriteSection}>
-            <button
-              className={`${css.favoriteBtn} ${game.isFavorite ? css.favoriteActive : ''}`}
-              onClick={() => toggleFavorite(game.id)}
-            >
-              {game.isFavorite ? '❤️ Прибрати з обраного' : '♡ Додати в обране'}
-            </button>
-          </div>
+          {isAuth && (
+            <div className={css.favorite}>
+              <button
+                className={`${css.favoriteBtn} ${isFavorite ? css.favoriteTrue : css.favoriteFalse}`}
+                onClick={handleToggleFavorite}
+                disabled={isLoading}
+              >
+                {isLoading
+                  ? '⏳'
+                  : isFavorite
+                    ? '❤️ Прибрати з обраного'
+                    : '♡ Додати в обране'}
+              </button>
+            </div>
+          )}
+
+          {!isAuth && (
+            <div className={css.favoriteHint}>
+              🔒 Увійдіть, щоб додати в обране
+            </div>
+          )}
         </div>
       </div>
     </div>

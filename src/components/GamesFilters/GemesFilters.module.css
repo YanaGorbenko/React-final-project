@@ -1,38 +1,48 @@
-/* GemesFilters.module.css */
 .form {
   width: 100%;
   background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
   border-radius: 16px;
   padding: 24px;
-  position: sticky;
-  top: 20px;
-  height: fit-content;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-bottom: 24px;
+}
+
+.filtersRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(26, 26, 26, 0.5);
+  border-radius: 12px;
+  padding: 16px;
 }
 
 .sectionTitle {
-  font-size: 1.25rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: white;
-  margin: 20px 0 12px 0;
-  padding-bottom: 8px;
+  margin: 0;
+  padding-bottom: 6px;
   border-bottom: 2px solid #e63946;
   display: inline-block;
 }
 
-.sectionTitle:first-of-type {
-  margin-top: 0;
-}
-
 .searchInput {
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 14px;
   background: #0a0a0a;
   border: 1px solid #333;
   border-radius: 8px;
   color: white;
   font-size: 0.875rem;
   transition: all 0.3s ease;
+  box-sizing: border-box;
 }
 
 .searchInput:focus {
@@ -43,23 +53,6 @@
 
 .searchInput::placeholder {
   color: #666;
-}
-
-.select {
-  width: 100%;
-  padding: 10px 12px;
-  background: #0a0a0a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: white;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.select:focus {
-  outline: none;
-  border-color: #e63946;
 }
 
 .genresList {
@@ -111,7 +104,6 @@
 
 .resetButton {
   width: 100%;
-  margin-top: 24px;
   padding: 12px;
   background: transparent;
   border: 1px solid #e63946;
@@ -128,26 +120,22 @@
   color: white;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
-
-/* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {
   .form {
     padding: 20px;
   }
 
-  .sectionTitle {
-    font-size: 1.1rem;
-    margin: 16px 0 10px 0;
+  .filtersRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .filterGroup {
+    padding: 14px;
   }
 
   .searchInput {
-    padding: 10px 14px;
-    font-size: 0.8rem;
-  }
-
-  .select {
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-size: 0.8rem;
   }
 
@@ -157,110 +145,50 @@
   }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .form {
     padding: 18px;
   }
 
-  .sectionTitle {
-    font-size: 1rem;
-  }
-
-  .genresList {
-    max-height: 200px;
-    gap: 8px;
-  }
-
-  .genreCheckbox {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-/* Планшети малі та мобільні (до 768px) */
-@media (max-width: 768px) {
-  .form {
-    width: 100%;
-    position: static;
-    margin-bottom: 24px;
-    padding: 16px;
-  }
-
   .filtersRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   .filterGroup {
-    flex: 1;
-    min-width: 200px;
-    background: rgba(26, 26, 26, 0.5);
-    border-radius: 12px;
     padding: 12px;
   }
 
   .sectionTitle {
-    font-size: 0.85rem;
-    margin: 0 0 8px 0;
-    border-bottom-width: 1px;
+    font-size: 0.8rem;
   }
 
   .searchInput {
     padding: 8px 12px;
     font-size: 0.75rem;
   }
-
-  .select {
-    padding: 8px 12px;
-    font-size: 0.75rem;
-  }
-
-  .genresList {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-    max-height: none;
-    overflow-y: visible;
-  }
-
-  .genreLabel {
-    white-space: nowrap;
-    padding: 4px 12px;
-    background: #0a0a0a;
-    border-radius: 20px;
-    font-size: 0.7rem;
-  }
-
-  .resetButton {
-    margin-top: 16px;
-    padding: 8px;
-    font-size: 0.75rem;
-  }
 }
 
-/* Телефони (576px - 768px) */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .form {
-    padding: 14px;
+    padding: 16px;
     border-radius: 14px;
   }
 
   .filtersRow {
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
   }
 
   .filterGroup {
-    min-width: calc(50% - 12px);
-    flex: 1;
     padding: 10px;
+    border-radius: 10px;
   }
 
   .sectionTitle {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    padding-bottom: 4px;
   }
 
   .searchInput {
@@ -268,41 +196,32 @@
     font-size: 0.7rem;
   }
 
-  .select {
-    padding: 6px 10px;
-    font-size: 0.7rem;
-  }
-
-  .genreLabel {
-    font-size: 0.65rem;
-    padding: 3px 10px;
-  }
-
   .resetButton {
     padding: 8px;
     font-size: 0.7rem;
+    margin-top: 12px;
   }
 }
 
-/* Маленькі телефони (до 480px) */
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .form {
-    padding: 12px;
+    padding: 14px;
     border-radius: 12px;
   }
 
   .filtersRow {
-    flex-direction: column;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
   }
 
   .filterGroup {
-    min-width: 100%;
-    padding: 10px;
+    padding: 8px;
   }
 
   .sectionTitle {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    padding-bottom: 4px;
   }
 
   .searchInput {
@@ -310,67 +229,75 @@
     font-size: 0.65rem;
   }
 
-  .select {
-    padding: 5px 8px;
+  .resetButton {
+    padding: 8px;
+    font-size: 0.65rem;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .filtersRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .filterGroup {
+    padding: 8px;
+  }
+
+  .sectionTitle {
     font-size: 0.65rem;
   }
 
-  .genreLabel {
+  .searchInput {
+    padding: 6px 8px;
     font-size: 0.6rem;
-    padding: 2px 8px;
   }
 
   .resetButton {
     padding: 6px;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    margin-top: 8px;
   }
 }
 
-/* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
   .form {
     padding: 28px;
     border-radius: 20px;
   }
 
+  .filtersRow {
+    gap: 20px;
+  }
+
+  .filterGroup {
+    padding: 20px;
+  }
+
   .sectionTitle {
-    font-size: 1.35rem;
-    margin: 24px 0 14px 0;
+    font-size: 0.95rem;
+    padding-bottom: 8px;
   }
 
   .searchInput {
-    padding: 14px 18px;
-    font-size: 0.9rem;
-  }
-
-  .select {
-    padding: 12px 14px;
-    font-size: 0.9rem;
-  }
-
-  .genresList {
-    gap: 12px;
-    max-height: 280px;
-  }
-
-  .genreLabel {
-    font-size: 0.9rem;
-    padding: 8px 10px;
-  }
-
-  .genreCheckbox {
-    width: 20px;
-    height: 20px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
   }
 
   .resetButton {
     padding: 14px;
-    font-size: 0.9rem;
-    margin-top: 28px;
+    font-size: 0.95rem;
   }
 }
 
-/* Для сенсорних екранів */
 @media (hover: none) {
   .genreLabel:hover {
     background: transparent;

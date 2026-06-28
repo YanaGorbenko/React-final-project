@@ -25,7 +25,7 @@ export const TopIdeasSection = () => {
 
         <div className={css.grid}>
           {topIdeas.map((idea, index) => (
-            <TopIdeaItem key={idea.id} idea={idea} rank={index + 1} />
+            <TopIdeaItem key={idea._id} idea={idea} rank={index + 1} />
           ))}
         </div>
       </div>

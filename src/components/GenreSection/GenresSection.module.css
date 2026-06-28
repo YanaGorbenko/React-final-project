@@ -1,4 +1,3 @@
-/* GenreSection.module.css */
 .section {
   background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
   border-radius: 24px;
@@ -86,9 +85,6 @@
   margin-top: 20px;
 }
 
-/* ========== АДАПТАЦІЯ ========== */
-
-/* Ноутбуки (1024px - 1280px) */
 @media (max-width: 1280px) {
   .section {
     padding: 24px;
@@ -112,7 +108,6 @@
   }
 }
 
-/* Планшети (768px - 1024px) */
 @media (max-width: 1024px) {
   .section {
     padding: 22px;
@@ -148,7 +143,6 @@
   }
 }
 
-/* Планшети малі (768px) */
 @media (max-width: 768px) {
   .section {
     padding: 20px;
@@ -191,7 +185,6 @@
   }
 }
 
-/* Телефони (480px - 768px) */
 @media (max-width: 576px) {
   .section {
     padding: 16px;
@@ -246,7 +239,6 @@
   }
 }
 
-/* Маленькі телефони (до 480px) */
 @media (max-width: 480px) {
   .section {
     padding: 14px;
@@ -279,7 +271,6 @@
   }
 }
 
-/* Для сенсорних екранів */
 @media (hover: none) {
   .section:hover {
     transform: none;
@@ -287,7 +278,6 @@
   }
 }
 
-/* Великі десктопи (понад 1400px) */
 @media (min-width: 1400px) {
   .section {
     padding: 32px;
@@ -320,7 +310,6 @@
   }
 }
 
-/* Для екранів з високою роздільною здатністю */
 @media (min-width: 1920px) {
   .section {
     padding: 36px;
@@ -345,7 +334,6 @@
   }
 }
 
-/* Планшети в альбомній орієнтації */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   .gamesGrid {
     grid-template-columns: repeat(3, 1fr);
